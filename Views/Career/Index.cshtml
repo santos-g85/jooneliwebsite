@@ -1,0 +1,141 @@
+﻿@model jooneliwebsite.Models.CVUploadModel
+<!-- Quick Connect Section -->
+<div class="container">
+    <h2 class="text-center fw-bold mb-4" style="font-size: 2.5rem; color:rgb(230,0,0)">Carrer Opportunities at Jooneli</h2>
+    <p class="text-center mb-4" style="font-size: 1.1rem;">
+        Your Chance to Be a Part of Something Bigger
+    </p>
+
+    <div class="cpy-7 mt-md-5 mt-0">
+        <div class="row  align-items-center gx-5">
+            <!-- Text Content -->
+            <div class="col-md-6 order-2 order-md-1">
+                <h1 class="fw-bold text-danger mb-4 display-4">
+                    Join Our Team.<br class="d-none d-md-block" />
+                    <span class="text-dark">Your chance to be a part of Something Bigger.</span>
+                </h1>
+                <p class="mb-4 lead">
+                    Jooneli Inc is a rapidly growing company led by Professionals. At Jooneli, you will find diverse and challenging roles across various functions that push your boundaries and help you reach your full potential. A career here immerses you in a culture of excellence and growth, empowering you to enhance your skills and advance your career to new heights.
+                </p>
+                <div class="d-flex flex-wrap gap-3 mb-4">
+                    <button class="btn btn-danger px-5 py-3 fs-5" data-bs-toggle="modal" data-bs-target="#CVUploadModal">Drop Your CV</button>
+                    @* <a href="#" class="btn btn-outline-danger px-5 py-3 fs-5">Learn More</a> *@
+                </div>
+            </div>
+            
+            <!-- Image Section -->
+            <div class="col-md-6 text-center pe-md-3 mt-4 mt-md-0 order-1 order-md-2">
+                <img src="~/images/career.jpg" class="img-fluid " style="max-width: 100%; height: auto; max-height: 500px;" alt="Remote Access Devices" />
+            </div>
+        </div>
+    </div>
+
+    <h2 class="d-flex justify-content-center">Current Openings</h2>
+    <hr />
+
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+        <a asp-controller="Business" asp-action="Multidesk" class="text-decoration-none text-dark">
+            <div class="card shadow rounded" style="max-width:300px">
+                <div class="card-body">
+                    <h5 class="card-title text-danger mb-3">
+                        <i class="bi bi-shield-lock me-2"></i> 360 Core Banking System
+                    </h5>
+
+                    <div class="bg-light p-4 rounded my-3 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#dc3545" class="bi bi-pc-display mb-3" viewBox="0 0 16 16">
+                            <path d="M5.5 13a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1H9v-1h3a2 2 0 0 0 2-2V3a2
+                        2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3v1H5.5zm-2-3V3a1
+                        1 0 0 1 1-1h8a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4.5a1 1 0 0 1-1-1z" />
+                        </svg>
+                    </div>
+
+                    <p>
+                        Instantly access and control any device as if you were sitting in front of it, no hassle.
+                    </p>
+                </div>
+            </div>
+        </a>
+
+        <a asp-controller="Business" asp-action="Multidesk" class="text-decoration-none text-dark">
+            <div class="card shadow rounded" style="max-width:300px">
+                <div class="card-body">
+                    <h5 class="card-title text-danger mb-3">
+                        <i class="bi bi-shield-lock me-2"></i> Trading System
+                    </h5>
+
+                    <div class="bg-light p-4 rounded my-3 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" fill="#dc3545" class="bi bi-pc-display mb-3" viewBox="0 0 384 512">
+                            <path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-102.1-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31L216 408z" />
+                        </svg>
+                    </div>
+
+                    <p>
+                        Instantly access and control any device as if you were sitting in front of it, no hassle.
+                    </p>
+                </div>
+            </div>
+        </a>
+
+        <a asp-controller="Business" asp-action="Multidesk" class="text-decoration-none text-dark">
+            <div class="card shadow rounded" style="max-width:300px">
+                <div class="card-body">
+                    <h5 class="card-title text-danger mb-3">
+                        <i class="bi bi-shield-lock me-2"></i> MultipleDesk
+                    </h5>
+
+                    <div class="bg-light p-4 rounded my-3 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" fill="#dc3545" class="bi bi-pc-display mb-3" viewBox="0 0 384 512">
+                            <path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-102.1-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31L216 408z" />
+                        </svg>
+                    </div>
+
+                    <p>
+                        Instantly access and control any device as if you were sitting in front of it, no hassle.
+                    </p>
+                </div>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+
+<!-- Registration Modal -->
+<div class="modal fade" id="CVUploadModal" tabindex="-1" aria-labelledby="CVUploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-controller="CVUploadController" asp-action="Upload" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">Drop Your CV</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label>Full Name</label>
+                        <input asp-for="Name" class="form-control" required />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label>Contact Number</label>
+                        <input asp-for="ContactNumber" class="form-control" required />
+                        <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label>Email</label>
+                        <input asp-for="Email" type="email" class="form-control" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <label>Upload Your CV</label>
+                    <div class="input-group">
+                        
+                        <input  type="file" class="form-control" placeholder="Upload a File *" aria-label="File Upload" aria-describedby="basic-addon2"> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger w-25" type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

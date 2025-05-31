@@ -1,7 +1,21 @@
+using jooneliwebsite.Models;
+using Microsoft.Extensions.Options;
+using jooneliwebsite.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection("MongoDbSettings"));
+
+builder.Services.AddSingleton<MongoDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+builder.Services.AddSingleton(resolver =>
+    resolver.GetRequiredService<IOptions<AppSettings>>().Value);
 
 var app = builder.Build();
 
