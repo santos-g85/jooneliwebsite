@@ -7,7 +7,7 @@ namespace webjooneli.Repository.Interfaces
         Task<CVUploadModel> GetCVByIdAsync(string id);
 
         Task<List<CVUploadModel>> GetAllCVsAsync();
-        Task CreateCVAsync(CVUploadModel cvUpload);
+        Task<string> CreateCVAsync(CVUploadModel cvUpload, IFormFile cvFile);
         Task DeleteCVAsync(string id);
     }
 }

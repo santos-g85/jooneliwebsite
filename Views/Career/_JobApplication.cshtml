@@ -1,0 +1,49 @@
+﻿@model (webjooneli.Models.Entities.JobApplicationModel App, webjooneli.Models.Entities.JobOpeningModel Opening)
+
+<div class="modal fade" id="CVUploadModal" tabindex="-1" aria-labelledby="CVUploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-controller="Career" asp-action="CVUploads" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">
+                        Drop Your CV for: <span class="text-dark">@Model.Opening.Title</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Hidden JobOpeningId -->
+                    <input type="hidden" name="JobOpeningId" value="@Model.Opening.Id" />
+
+                    <div class="mb-2">
+                        <label>Full Name</label>
+                        <input asp-for="App.Name" class="form-control" required />
+                        <span asp-validation-for="App.Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Contact Number</label>
+                        <input asp-for="App.ContactNumber" class="form-control" required />
+                        <span asp-validation-for="App.ContactNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Email</label>
+                        <input asp-for="App.Email" type="email" class="form-control" required />
+                        <span asp-validation-for="App.Email" class="text-danger"></span>
+                    </div>
+
+                    <label>Upload Your CV</label>
+                    <div class="input-group">
+                        <input type="file" name="cvfile" class="form-control">
+                        <span asp-validation-for="App.CVFileId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger w-25" type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

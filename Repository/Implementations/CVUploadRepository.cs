@@ -4,6 +4,7 @@ using webjooneli.Repository.Interfaces;
 using webjooneli.Settings;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using MongoDB.Driver.GridFS;
 
 namespace webjooneli.Repository.Implementations
 {
@@ -11,12 +12,13 @@ namespace webjooneli.Repository.Implementations
     {
         private readonly IMongoCollection<CVUploadModel> _cvCollection;
         private readonly ILogger<CVUploadRepository> _logger;
-
+        private readonly GridFSBucket _gridFS;
         public CVUploadRepository(MongoDbContext mongoDbContext, ILogger<CVUploadRepository> logger)
         {
             var collectionName = nameof(CVUploadModel).Replace("Model", "");
             _cvCollection = mongoDbContext.GetCollection<CVUploadModel>(collectionName);
             _logger = logger;
+            _gridFS = mongoDbContext.GridFsBucket;
         }
 
         // Method to get a CV by its ID
@@ -27,13 +29,39 @@ namespace webjooneli.Repository.Implementations
         }
 
         // Method to create a new CV record
-        public async Task CreateCVAsync(CVUploadModel cvUpload)
+        //public async Task CreateCVAsync(CVUploadModel cvUpload)
+        //{
+        //    await _cvCollection.InsertOneAsync(cvUpload);
+        //    _logger.LogInformation("CV uploaded successfully: {FullName}, FileId: {FileId}", cvUpload.Name, cvUpload.CVFileId);
+        //}
+        public async Task<string> CreateCVAsync(CVUploadModel cvUpload, IFormFile cvFile)
         {
+            if (cvFile == null || cvFile.Length == 0)
+                throw new ArgumentException("Invalid CV file.");
+
+            // Upload file to GridFS
+            var fileId = await _gridFS.UploadFromStreamAsync(
+                cvFile.FileName,
+                cvFile.OpenReadStream(),
+                new GridFSUploadOptions
+                {
+                    Metadata = new MongoDB.Bson.BsonDocument
+                    {
+                            { "Name", cvUpload.Name },
+                            { "Email", cvUpload.Email },
+                            { "ContactNumber", cvUpload.ContactNumber },
+                            { "UploadedAt", cvUpload.CreatedAt }
+                    }
+                });
+
+            cvUpload.CVFileId = fileId.ToString();
             await _cvCollection.InsertOneAsync(cvUpload);
-            _logger.LogInformation("CV uploaded successfully: {FullName}, FileId: {FileId}", cvUpload.Name, cvUpload.CVFileId);
+
+            _logger.LogInformation("CV uploaded successfully. Name: {Name}, FileId: {FileId}", cvUpload.Name, cvUpload.CVFileId);
+
+            return cvUpload.CVFileId;
         }
 
-       
         // Method to delete a CV by its ID
         public async Task DeleteCVAsync(string id)
         {
@@ -61,5 +89,7 @@ namespace webjooneli.Repository.Implementations
         {
             return await _cvCollection.Find(_ => true).ToListAsync();
         }
+
+       
     }
 }

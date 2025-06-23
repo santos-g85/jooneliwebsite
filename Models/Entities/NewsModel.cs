@@ -20,7 +20,8 @@ namespace webjooneli.Models.Entities
         [BsonElement("Category")]
         public string Category { get; set; }
 
-        [BsonElement("Image")]
+        
+        [BsonRepresentation(BsonType.ObjectId)]
         public string ImageId { get; set; }
 
         [BsonElement("Featured")]

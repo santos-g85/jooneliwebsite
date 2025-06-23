@@ -76,14 +76,14 @@
 
     @* @await Html.PartialAsync("~/Views/Home/Career/_JobOpenings.cshtml", Model.JobOpenings) *@
 
-    @* @if (Model.JobOpenings != null && Model.JobOpenings.Any()) *@
-    @* { *@
-    @*     @await Html.PartialAsync("~/Views/Home/Career/_JobOpenings.cshtml", Model.JobOpenings) *@
-    @* } *@
-    @* else *@
-    @* { *@
-    @*     <p>No job openings available at the moment.</p> *@
-    @* } *@
+    @if (Model.JobOpenings != null && Model.JobOpenings.Any()) 
+    { 
+        @await Html.PartialAsync("~/Views/Career/_JobOpenings.cshtml", Model.JobOpenings) 
+    }
+    else 
+     { 
+        <p>No job openings available at the moment.</p> 
+     } 
 
     <!-- Registration Modal -->
     <div class="modal fade" id="CVUploadModal" tabindex="-1" aria-labelledby="CVUploadModalLabel" aria-hidden="true">

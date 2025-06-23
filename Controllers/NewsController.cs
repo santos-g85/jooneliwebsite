@@ -20,10 +20,11 @@ namespace webjooneli.Controllers
         // GET: /News
         public async Task<IActionResult> Index()
         {
-            var newsList = await _newsRepository.GetAllNewsAsync();
+            List<NewsModel> newsList = await _newsRepository.GetAllNewsAsync();
             return View(newsList);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: /News/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -36,6 +37,16 @@ namespace webjooneli.Controllers
 
             return View(news);
         }
+
+        public async Task<IActionResult> NewsDetails()
+        {
+            var news = await _newsRepository.GetNewsByDateAsync();
+            if (news == null)
+                return NotFound();
+
+            return View(news);
+        }
+
         [Authorize(Roles = "Admin")]
         // GET: /News/Create
         public IActionResult Create()
@@ -49,9 +60,9 @@ namespace webjooneli.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewsModel news, IFormFile imageFile)
         {
+            _logger.LogInformation("attempting to save news and image");
             if (!ModelState.IsValid)
                 return View(news);
-
             try
             {
                 news.CreatedAt = DateTime.UtcNow;
@@ -80,6 +91,7 @@ namespace webjooneli.Controllers
 
             return View(news);
         }
+
         [Authorize(Roles = "Admin")]
         // POST: /News/Edit/5
         [HttpPost]
@@ -95,6 +107,7 @@ namespace webjooneli.Controllers
             await _newsRepository.UpdateNewsAsync(id, news);
             return RedirectToAction(nameof(Index));
         }
+
         [Authorize(Roles = "Admin")]
         // GET: /News/Delete/5
         public async Task<IActionResult> Delete(string id)
@@ -108,6 +121,7 @@ namespace webjooneli.Controllers
 
             return View(news);
         }
+
         [Authorize(Roles = "Admin")]
         // POST: /News/DeleteConfirmed
         [HttpPost]

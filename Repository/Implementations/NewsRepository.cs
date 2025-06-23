@@ -102,7 +102,7 @@ namespace webjooneli.Repository.Implementations
         public async Task<List<NewsModel>> GetAllNewsAsync()
         {
             try
-            {
+            { 
                 return await _newscollection.Find(_ => true).ToListAsync();
             }
             catch (Exception ex)
@@ -144,8 +144,15 @@ namespace webjooneli.Repository.Implementations
         {
             try
             {
-                var filter = Builders<NewsModel>.Filter.Eq(n => n.Id, id);
-                var result = await _newscollection.ReplaceOneAsync(filter, updatedNews);
+               
+                var filter = Builders<NewsModel>.Filter.Eq(news => news.Id, id);
+                var update = Builders<NewsModel>.Update
+                    .Set(news => news.Title, updatedNews.Title)
+                    .Set(news => news.Content, updatedNews.Content)
+                    .Set(news => news.Category, updatedNews.Category)
+                    .Set(news=>news.IsFeatured, updatedNews.IsFeatured);
+
+                var result = await _newscollection.UpdateOneAsync(filter, update);
 
                 if (result.ModifiedCount > 0)
                 {
@@ -161,6 +168,9 @@ namespace webjooneli.Repository.Implementations
                 _logger.LogError(ex, "Failed to update news.");
                 throw;
             }
+
         }
     }
 }
+
+
