@@ -28,13 +28,14 @@ namespace webjooneli.Repository.Implementations
         {
             try
             {
+                _logger.LogInformation($"Creating news with title: {news.Title}");
                 if (imageFile != null && imageFile.Length > 0)
                 {
                     using var inputStream = imageFile.OpenReadStream();
 
                     // Load image using ImageSharp
                     using var image = await Image.LoadAsync(inputStream);
-
+                    _logger.LogInformation("Image loaded successfully: {FileName}", imageFile.FileName);
                     // Optional: Resize/compress
                     image.Mutate(x => x.Resize(new ResizeOptions
                     {
@@ -48,7 +49,7 @@ namespace webjooneli.Repository.Implementations
                     {
                         Quality = 75
                     });
-
+                    _logger.LogInformation("Image converted to WebP format successfully: {FileName}", imageFile.FileName);
                     webpStream.Position = 0;
 
                     var fileId = await _gridFS.UploadFromStreamAsync(

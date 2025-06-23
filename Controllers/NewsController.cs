@@ -56,6 +56,7 @@ namespace webjooneli.Controllers
             {
                 news.CreatedAt = DateTime.UtcNow;
                 await _newsRepository.CreateNewsAsync(news, imageFile);
+                _logger.LogInformation("News created successfully with title: {Title}", news.Title);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
