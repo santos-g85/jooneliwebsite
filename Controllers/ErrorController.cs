@@ -1,64 +1,50 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebJooneli.Controllers
+[Route("Error")]
+public class ErrorController : Controller
 {
-    public class ErrorController : Controller
+    private readonly ILogger<ErrorController> _logger;
+
+    public ErrorController(ILogger<ErrorController> logger)
     {
-        private readonly ILogger<ErrorController> _logger;
+        _logger = logger;
+    }
 
-        
-        public ErrorController(ILogger<ErrorController> logger)
+    [Route("404")]
+    public IActionResult Error404()
+    {
+        var originalPath = HttpContext.Features.Get<IStatusCodeReExecuteFeature>()?.OriginalPath;
+        _logger.LogWarning("404 Not Found: {Path}", originalPath);
+        return View("Error404");
+    }
+
+    [Route("503")]
+    public IActionResult Error503()
+    {
+        _logger.LogError("503 Service Unavailable");
+        return View("Maintenance");
+    }
+
+    [Route("{statusCode:int}")]
+    public IActionResult StatusCodeHandler(int statusCode)
+    {
+        _logger.LogError("HTTP {StatusCode} error occurred", statusCode);
+
+        return statusCode switch
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
+            404 => RedirectToAction("Error404"),
+            503 => RedirectToAction("Error503"),
+            >= 500 => View("Maintenance"),
+            _ => View("GenericError") 
+        };
+    }
 
-        
-        [Route("Error/404")]
-        public IActionResult Error404()
-        {
-            _logger.LogError("Page not found - 404 error.");
-            return View("Error404");  
-        }
-
-        // 503 Error (Service Unavailable)
-        [Route("Error/503")]
-        public IActionResult Error503()
-        {
-            _logger.LogError("Service is temporarily unavailable - 503 error.");
-            return View("Maintenance");  
-        }
-
-        // Generic error handler that can handle more than just 404 and 503
-        [Route("Error/{statusCode}")]
-        public IActionResult GenericHandler(int statusCode)
-        {
-            // Log error with the status code
-            _logger.LogError($"Encountered error with status code: {statusCode}");
-
-            // Handle common HTTP status codes
-            switch (statusCode)
-            {
-                case 400:
-                    return View("BadRequest"); // A view for bad request errors (400)
-                case 404:
-                    return RedirectToAction("Error404");
-                case 503:
-                    return RedirectToAction("Error503");
-                case 500:
-                    return View("Maintenance"); // A custom view for 500 Internal Server Errors
-                default:
-                    return View("GenericError"); // Default for any unhandled error
-            }
-        }
-
-        // for unhandled exceptions if needed
-        [Route("Error/Exception")]
-        public IActionResult HandleException()
-        {
-            _logger.LogError("Unhandled exception occurred.");
-            return View("GenericError"); 
-        }
+    [Route("HandleException")]
+    public IActionResult HandleException()
+    {
+        var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+        _logger.LogError(exceptionHandlerPathFeature?.Error, "Unhandled exception occurred");
+        return View("GenericError");
     }
 }
