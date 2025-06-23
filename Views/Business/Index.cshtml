@@ -1,0 +1,86 @@
+﻿@await Html.PartialAsync("~/Views/Business/_BusinessSolution.cshtml")
+
+<!-- Business Verticas Section -->
+<div class="container mb-5">
+    @* <h2 class="text-center fw-bold mb-3" style="font-size: 2.5rem; color: rgb(230, 0, 0);">BUSINESS VERTICALS</h2> *@
+    <h2 class="text-center fw-bold mb-3" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+        BUSINESS VERTICALS
+    </h2>
+    <p class="text-center mb-5" style="font-size: 1.1rem;">
+        Empower your enterprise with our innovative business solutions
+    </p>
+
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+        <!-- 360 Core Banking System -->
+
+            <div class="card shadow-sm rounded" style="max-width: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title  mb-3">
+                        <i class="bi bi-bank2 me-2"></i> 360 Core Banking
+                    </h5>
+                    <div class="bg-light p-4 rounded text-center mb-3" >
+                    <img src="~/images/joonlogo--JfLTwqW.png" style="height:64px" width="64px" alt="Alternate Text" />
+                    </div>
+                    <p>
+                        A fully integrated, secure banking platform offering customer management, transaction processing, compliance, and reporting — all in one place.
+                    </p>
+                <div class="d-flex justify-content-between">
+                    <a asp-controller="Business" asp-action="Details">
+                        <span class="btn  btn-sm btn-outline-dark">Learn More</span>
+                    </a>
+                    <a href="http://jooneli.com/">
+                        <span class="btn  btn-sm btn-outline-danger">Demo</span>
+                    </a>
+                </div>
+                </div>
+            </div>
+
+
+        <!-- Trading System -->
+            <div class="card shadow-sm rounded" style="max-width: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title  mb-3">
+                        <i class="bi bi-graph-up-arrow me-2"></i> Trading System
+                    </h5>
+                    <div class="bg-light p-4 rounded text-center mb-3">
+                    <img src="~/images/joonlogo--JfLTwqW.png" style="height:64px" width="64px" alt="Alternate Text" />
+                    </div>
+                    <p>
+                        A robust and high-performance online trading system for equities, commodities, and derivatives with real-time analytics and multi-device access.
+                    </p>
+                <div class="d-flex justify-content-between">
+                    <a asp-controller="Business" asp-action="Details">
+                        <span class="btn  btn-sm btn-outline-dark">Learn More</span>
+                    </a>
+                    <a href="http://jooneli.com/">
+                        <span class="btn  btn-sm btn-outline-danger">Demo</span>
+                    </a>
+                </div>
+                </div>
+            </div>
+
+        <!-- MultipleDesk -->
+            <div class="card shadow-sm rounded" style="max-width: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title  mb-3">
+                        <i class="bi bi-window-desktop me-2"></i> MultipleDesk
+                    </h5>
+                    <div class="bg-light p-4 rounded text-center mb-3">
+                    <img src="~/images/joonlogo--JfLTwqW.png" style="height:64px" width="64px" alt="Alternate Text" />
+                    </div>
+                    <p>
+                        Secure remote desktop management solution for IT professionals and support teams. Access, monitor, and troubleshoot systems across locations.
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <a asp-controller="Business" asp-action="Details">
+                            <span class="btn  btn-sm btn-outline-dark">Learn More</span>
+                        </a>
+                    <a href="http://multipledesk.com/">
+                        <span class="btn  btn-sm btn-outline-danger">Demo</span>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+</div>

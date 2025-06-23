@@ -1,0 +1,47 @@
+﻿@model webjooneli.Models.Entities.JobApplicationModel
+
+@{
+    ViewBag.Title = "Job Application Details";
+}
+
+<h2>Job Application Details</h2>
+
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Full Name</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <th>Contact Number</th>
+            <td>@Model.ContactNumber</td>
+        </tr>
+        <tr>
+            <th>Job Opening Title</th>
+            <td>@Model.JobOpeningId</td>
+        </tr>
+        <tr>
+            <th>Applied At</th>
+            <td>@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+        </tr>
+        <tr>
+            <th>CV File</th>
+            <td>
+                @if (!string.IsNullOrEmpty(Model.CVFileId))
+                {
+                    <a href="@Url.Action("DownloadCV", "JobApplication", new { id = Model.CVFileId })" class="btn btn-link">Download CV</a>
+                }
+                else
+                {
+                    <span>No CV Uploaded</span>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+
+<a href="@Url.Action("Index", "JobApplication")" class="btn btn-secondary">Back to Applications</a>

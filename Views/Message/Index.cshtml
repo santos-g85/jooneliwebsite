@@ -1,0 +1,40 @@
+﻿@model IEnumerable<webjooneli.Models.Entities.MessagesModel>
+
+@{
+    ViewBag.Title = "Messages";
+    Layout = "_AdminLayout";
+}
+
+<h2>Messages</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Message Name</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.Name</td>
+                <td>@message.CreatedAt.ToString("MM/dd/yyyy HH:mm")</td>
+                <td>
+                    <a href="@Url.Action("Details", "Message", new { id = message.Id })" class="btn btn-info btn-sm">Details</a>
+                    <a href="@Url.Action("Delete", "Message", new { id = message.Id })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* <a href="@Url.Action("Create", "Message")" class="btn btn-primary">Create New Message</a> *@

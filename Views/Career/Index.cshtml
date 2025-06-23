@@ -1,0 +1,126 @@
+﻿@using webjooneli.Models.ViewModels
+@model CareerViewModel
+<!-- Quick Connect Section -->
+<div class="container">
+    @* <h2 class="text-center fw-bold mb-4" style="font-size: 2.5rem; color:rgb(230,0,0)">Carrer Opportunities at Jooneli</h2> *@
+    <h1 class="text-center fw-bold mb-4 fs-1" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+        Career Opportunities at Jooneli
+    </h1>
+    <p class="text-center mb-4" style="font-size: 1.1rem;">
+        Your Chance to Be a Part of Something Bigger
+    </p>
+
+    <div class="cpy-7 mt-md-5 mt-0">
+        <div class="row  align-items-center gx-5">
+            <!-- Text Content -->
+            <div class="col-md-6 order-2 order-md-1">
+                <h1 class="fw-bold mb-4 display-4" style="color:rgb(230,0,0)">
+                    Join Our Team.<br class="d-none d-md-block" />
+                    <span class="text-dark">Your chance to be a part of Something Bigger.</span>
+                </h1>
+                <p class="mb-4 lead">
+                    Jooneli Inc is a rapidly growing company led by Professionals. At Jooneli, you will find diverse and challenging roles across various functions that push your boundaries and help you reach your full potential. A career here immerses you in a culture of excellence and growth, empowering you to enhance your skills and advance your career to new heights.
+                </p>
+                <div class="d-flex flex-wrap gap-3 mb-4">
+                    <button class="btn btn-danger px-5 py-3 fs-5" data-bs-toggle="modal" data-bs-target="#CVUploadModal">Drop Your CV</button>
+                    @* <a href="#" class="btn btn-outline-danger px-5 py-3 fs-5">Learn More</a> *@
+                </div>
+            </div>
+
+            <!-- Image Section -->
+            <div class="col-md-6 text-center pe-md-3 mt-4 mt-md-0 order-1 order-md-2 d-none d-md-block">
+                <img src="~/images/career.jpg"
+                     class="img-fluid"
+                     style="max-width: 100%; height: auto; max-height: 500px; transform: rotate(10deg); "
+                     alt="Remote Access Devices" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Toast -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="liveToast" class="toast align-items-center text-white bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        @TempData["SuccessMessage"]
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+            var toastElement = document.getElementById('liveToast');
+            if (toastElement) {
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            }
+            });
+        </script>
+    }
+
+    @* <h2 class="d-flex justify-content-center">Current Openings</h2> *@
+    @* <hr /> *@
+
+    @* <h2 class="text-center mt-5 fw-bold">Current Openings</h2> *@
+    <h1 class="text-center fw-bold mt-5" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+        Current Openings
+    </h1>
+    <hr class="mx-auto" style="width: 80px; border-top: 3px solid ;" />
+
+    @* @await Html.PartialAsync("~/Views/Home/Career/_JobOpenings.cshtml", Model.JobOpenings) *@
+
+    @* @if (Model.JobOpenings != null && Model.JobOpenings.Any()) *@
+    @* { *@
+    @*     @await Html.PartialAsync("~/Views/Home/Career/_JobOpenings.cshtml", Model.JobOpenings) *@
+    @* } *@
+    @* else *@
+    @* { *@
+    @*     <p>No job openings available at the moment.</p> *@
+    @* } *@
+
+    <!-- Registration Modal -->
+    <div class="modal fade" id="CVUploadModal" tabindex="-1" aria-labelledby="CVUploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form asp-controller="Career" asp-action="CVUploads" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger">Drop Your CV</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label>Full Name</label>
+                            <input asp-for="CVUploadModel.Name" class="form-control" required />
+                            <span asp-validation-for="CVUploadModel.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Contact Number</label>
+                            <input asp-for="CVUploadModel.ContactNumber" class="form-control" required />
+                            <span asp-validation-for="CVUploadModel.ContactNumber" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Email</label>
+                            <input asp-for="CVUploadModel.Email" type="email" class="form-control" required />
+                            <span asp-validation-for="CVUploadModel.Email" class="text-danger"></span>
+                        </div>
+                        <label>Upload Your CV</label>
+                        <div class="input-group">
+                            <input type="file" name="CVFile" class="form-control" placeholder="Upload your CV" aria-label="File Upload" aria-describedby="basic-addon2">
+                            <span asp-validation-for="CVUploadModel.CVFileId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger w-25" type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

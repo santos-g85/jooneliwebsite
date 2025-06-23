@@ -1,0 +1,36 @@
+﻿@model webjooneli.Models.Entities.NewsModel
+@{
+    ViewBag.Title = "Edit News";
+    Layout = "_AdminLayout";
+}
+
+<h2>Edit News</h2>
+
+@using (Html.BeginForm("Edit", "News", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Content)
+        @Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = 5 })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category)
+        @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsFeatured)
+        @Html.CheckBoxFor(m => m.IsFeatured)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="@Url.Action("Index", "News")" class="btn btn-secondary">Cancel</a>
+}

@@ -1,0 +1,16 @@
+﻿@model webjooneli.Models.Entities.MessagesModel
+@{
+    ViewBag.Title = "Delete Message";
+    Layout = "_AdminLayout";
+}
+
+<h2>Are you sure you want to delete the message: <strong>@Model.Name</strong>?</h2>
+
+<div class="alert alert-warning">
+    <strong>Warning!</strong> This action cannot be undone.
+</div>
+
+<form method="post" class="mt-4">
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="@Url.Action("Index", "Message")" class="btn btn-secondary">Cancel</a>
+</form>

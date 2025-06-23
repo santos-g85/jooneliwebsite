@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Create Job Application";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@using (Html.BeginForm("Create", "JobApplication", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label for="FullName">Full Name</label>
+        <input type="text" name="FullName" id="FullName" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" name="Email" id="Email" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="ContactNumber">Contact Number</label>
+        <input type="text" name="ContactNumber" id="ContactNumber" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="JobOpeningId">Job Opening</label>
+        <select name="JobOpeningId" id="JobOpeningId" class="form-control" required>
+            <option value="">-- Select Job Opening --</option>
+            @foreach (var jobOpening in Model.JobOpenings)
+            {
+                <option value="@jobOpening.Id">@jobOpening.Title - @jobOpening.Company</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="CVFile">Upload CV (PDF, DOC, DOCX)</label>
+        <input type="file" name="CVFile" id="CVFile" class="form-control" accept=".pdf,.doc,.docx" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Application</button>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success mt-2">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-2">
+        @TempData["ErrorMessage"]
+    </div>
+}

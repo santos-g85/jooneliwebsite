@@ -1,0 +1,53 @@
+﻿@model IEnumerable<webjooneli.Models.Entities.JobOpeningModel>
+
+@{
+    ViewBag.Title = "Job Openings";
+    Layout = "_AdminLayout";
+}
+
+<h2>Job Openings</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Employment Type</th>
+            <th>Salary Range</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var job in Model)
+        {
+            <tr>
+                <td>@job.Title</td>
+                <td>@job.Company</td>
+                <td>@job.Location</td>
+                <td>@job.EmploymentType</td>
+                <td>@job.SalaryRange</td>
+                <td>
+                    <a href="@Url.Action("Edit", "JobOpening", new { id = job.Id })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("Delete", "JobOpening", new { id = job.Id })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create", "JobOpening")" class="btn btn-primary">Create New Job Opening</a>

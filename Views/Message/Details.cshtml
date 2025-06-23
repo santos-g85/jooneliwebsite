@@ -1,0 +1,18 @@
+﻿@model webjooneli.Models.Entities.MessagesModel
+
+
+@{
+    ViewBag.Title = "Message Details";
+    Layout = "_AdminLayout";
+}
+
+<h2>Message Details</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p><strong>Created At:</strong> @Model.CreatedAt.ToString("MM/dd/yyyy hh:mm tt")</p>
+        <p><strong>Content:</strong> @Model.Message</p>
+        <a href="@Url.Action("Index", "Message")" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

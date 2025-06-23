@@ -1,0 +1,168 @@
+﻿@await Html.PartialAsync("~/Views/About/_AboutSolution.cshtml")
+
+<div class="mb-4">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active bg-danger border-1" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class=" bg-danger border-1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="bg-danger border-1" aria-label="Slide 3"></button>
+    </div>
+       
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <div class="card border-0" style="height:70vh;" >
+                    <div class="card-body" style="overflow-y: scroll; -ms-overflow-style: none; scrollbar-width: none;">
+                    @* <h2 class="card-title text-danger mb-3 d-flex justify-content-center fs-1">Inspiring Banking Systems with IT Solutions</h2> *@
+                        <h1 class="card-title mb-3 d-flex justify-content-center fs-1" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+                            Inspiring Banking Systems with IT Solutions
+                        </h1>
+
+                    <p class="text-muted fs-5 d-flex justify-content-center fs-3">
+                        Jooneli Inc. Pvt. Ltd. is a leading Nepali software company focused on transforming financial services through innovative IT solutions. Founded in 2071 (Nepali calendar), the company began in Myanmar and now serves communities across Bangladesh and Nepal, improving financial access through technology.
+                    </p>
+                    <p class="text-muted fs-3 ">
+                        With flagship products like the <strong>360 Core Banking System</strong> and <strong>Jooneli Trading</strong>, Jooneli empowers cooperatives, financial institutions, and businesses by streamlining operations, integrating POS systems, and enabling real-time financial management.
+                    </p>
+                    <p class="text-muted fs-3 d-flex justify-content-center">
+                        Partnering with over 367 cooperatives in 33 districts of Nepal, Jooneli is committed to economic empowerment and financial inclusion. Its global vision is to build a financially inclusive world by delivering impactful and scalable digital banking solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="card border-0" style="height:70vh;">
+                <div class="card-body ">
+                    @* <h2 class="card-title text-danger mb-3 d-flex justify-content-center fs-1">Unified Digital Banking Ecosystem</h2> *@
+                        <h1 class="card-title mb-3 d-flex justify-content-center fs-1" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+                            Unified Digital Banking Ecosystem
+                        </h1>
+                    <p class="text-muted fs-3">Our 360 Core Banking System powers a seamless digital banking experience across platforms.</p>
+                    <ul class="fs-4 list-unstyled">
+                        <li>SMS Banking, Mobile Banking, ATM Services</li>
+                        <li>Tab Banking & Mobile Teller</li>
+                        <li><strong>Key Features</strong>: Real-time processing, top-tier security, and scalability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="card border-0" style="height:70vh;">
+                    <div class="card-body" style="overflow-y: scroll; -ms-overflow-style: none; scrollbar-width: none;">
+                    @* <h2 class="card-title text-danger mb-3 d-flex justify-content-center fs-1">Our Mission</h2> *@
+                        <h1 class="card-title mb-3 d-flex justify-content-center fs-1" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+                            Our Mission
+                        </h1>
+                    <p class="text-muted fs-5 d-flex justify-content-center fs-3">
+                        Our mission is to develop, produce, and sell software products that meet the needs of our customers while creating value for them. We aim to provide reliable, effective, and easy-to-use software, while fostering positive growth.
+                    </p>
+                    @* <h2 class="card-title text-danger mt-4 mb-3 d-flex justify-content-center fs-1">Our Values</h2> *@
+                        <h1 class="card-title mt-4 mb-3 d-flex justify-content-center fs-1" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+                          Our Values
+                        </h1>
+                    <p class="text-muted fs-5 d-flex justify-content-center fs-3">
+                        We believe in providing excellent customer service and continuously improving our products based on customer feedback. We uphold integrity and ethics in all operations and value teamwork as a key to our success.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+            <div class="d-none d-md-flex justify-content-between align-items-center position-absolute bottom-0 start-0 end-0 p-3" style="z-index: 10; ">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="text-black">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="text-black">Next</span>
+            </button>
+            </div>
+    </div> 
+  </div>
+
+    @* <h1 class="text-danger d-flex justify-content-center mt-4">Our Leadership</h1> *@
+    <h1 class="d-flex justify-content-center mt-4" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+        Our Leadership
+    </h1>
+    <hr  class="mb-4"/>
+    <div class="container py-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center">
+            <!-- Repeat this block for each team member -->
+            <div class="col-6 col-md-2">
+                <div class="card shadow rounded h-100">
+                    <div class="card-body text-center">
+                        <div class="bg-light p-4 rounded my-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#dc3545" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                        </div>
+                        <h5 class="card-title text-danger">John Doe</h5>
+                        <p class="text-muted">CEO</p>
+                        <a href="https://linkedin.com/company/jooneli" target="_blank" class="text-decoration-none text-dark d-inline-flex align-items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                            </svg> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat ends -->
+            <div class="col-6 col-md-2">
+                <div class="card shadow rounded h-100">
+                    <div class="card-body text-center">
+                        <div class="bg-light p-4 rounded my-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#dc3545" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                        </div>
+                        <h5 class="card-title text-danger">John Doe</h5>
+                        <p class="text-muted">CEO</p>
+                        <a href="https://linkedin.com/company/jooneli" target="_blank" class="text-decoration-none text-dark d-inline-flex align-items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                            </svg> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-2">
+                <div class="card shadow rounded h-100">
+                    <div class="card-body text-center">
+                        <div class="bg-light p-4 rounded my-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#dc3545" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                        </div>
+                        <h5 class="card-title text-danger">John Doe</h5>
+                        <p class="text-muted">CEO</p>
+                        <a href="https://linkedin.com/company/jooneli" target="_blank" class="text-decoration-none text-dark d-inline-flex align-items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                            </svg> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @* <h1 class="text-danger d-flex justify-content-center mt-4 ">Our Partners</h1> *@
+    <h1 class="d-flex justify-content-center mt-4" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+        Our Partners
+    </h1>
+    <hr class="mb-4"/>
+
+    <div class="mb-3">
+    <h5 class=" mb-2 d-flex justify-content-center">
+        Why Partner with Jooneli?
+    </h5>
+    <p class="d-flex justify-content-center ">
+        The exponential growth in Nepal’s digital banking has been possible through collaboration with our national and international partners.
+    </p>
+    </div>
+
+</div>

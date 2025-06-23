@@ -1,0 +1,59 @@
+﻿@model webjooneli.Models.Entities.JobOpeningModel
+
+@{
+    ViewBag.Title = "Create Job Opening";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create Job Opening</h2>
+
+<form asp-controller="JobOpening" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label for="Title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="Title" name="Title" asp-for="Title" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <textarea class="form-control" id="Description" name="Description" rows="4" asp-for="Description" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="LogoUrl" class="form-label">Logo URL</label>
+        <input type="text" class="form-control" id="LogoUrl" name="LogoUrl" asp-for="LogoUrl">
+    </div>
+
+    <div class="mb-3">
+        <label for="Department" class="form-label">Department</label>
+        <input type="text" class="form-control" id="Department" name="Department" asp-for="Department" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="Location" class="form-label">Location</label>
+        <input type="text" class="form-control" id="Location" name="Location" asp-for="Location" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="Company" class="form-label">Company</label>
+        <input type="text" class="form-control" id="Company" name="Company" asp-for="Company" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="SalaryRange" class="form-label">Salary Range</label>
+        <input type="text" class="form-control" id="SalaryRange" name="SalaryRange" asp-for="SalaryRange" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="EmploymentType" class="form-label">Employment Type</label>
+        <input type="text" class="form-control" id="EmploymentType" name="EmploymentType" asp-for="EmploymentType" required>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="IsActive" name="IsActive" asp-for="IsActive">
+        <label class="form-check-label" for="IsActive">Is Active</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Job Opening</button>
+</form>
+
+<a href="@Url.Action("Index", "JobOpening")" class="btn btn-secondary mt-3">Back to List</a>

@@ -1,0 +1,41 @@
+﻿@model webjooneli.Models.Entities.JobApplicationModel
+
+@{
+    ViewBag.Title = "Delete Job Application";
+    Layout = "_AdminLayout";
+}
+
+<h2>Delete Job Application</h2>
+
+<div class="alert alert-danger">
+    <strong>Warning!</strong> Are you sure you want to delete this application?
+</div>
+
+<table class="table">
+    <tr>
+        <th>Full Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Contact Number</th>
+        <td>@Model.ContactNumber</td>
+    </tr>
+    <tr>
+        <th>Job Opening Title</th>
+        <td>@Model.JobOpeningId</td>
+    </tr>
+    <tr>
+        <th>Applied At</th>
+        <td>@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+    </tr>
+</table>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete Application</button>
+    <a href="@Url.Action("Index", "JobApplication")" class="btn btn-secondary">Cancel</a>
+</form>

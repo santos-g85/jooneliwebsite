@@ -1,0 +1,152 @@
+﻿<div class="container-fluid px-4 px-lg-5">
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
+        <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:60px; width:60px" />
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+        <i class="bi bi-list fs-4 navbar-toggler-icon-custom"></i>
+    </button>
+
+    <!-- Desktop Navigation -->
+    <div class="navbar-collapse collapse d-lg-flex justify-content-center">
+        <ul class="navbar-nav gap-4">
+            <li class="nav-item">
+                <a class="nav-link nav-link-custom fw-medium" asp-controller="About" asp-action="Index">ABOUT US</a>
+            </li>
+
+            <!-- Solutions Dropdown -->
+            <li class="nav-item dropdown position-static solutions-dropdown">
+                <a class="nav-link nav-link-custom fw-medium dropdown-toggle-custom d-flex align-items-center"
+                   asp-controller="Business" asp-action="Index" role="button">
+                    SOLUTIONS
+                    @* <i class="bi bi-chevron-down ms-1 dropdown-arrow"></i> *@
+                </a>
+                <!-- Mega Dropdown -->
+                <div class="mega-dropdown-container position-absolute w-100">
+                    <div class="mega-dropdown bg-white shadow-lg border-top">
+                        <div class="container-fluid px-4 px-lg-5 py-5">
+                            <div class="row g-4">
+                                <!-- Solution 1 -->
+                                @* <div class="col-lg-4"> *@
+                                @*     <div class="solution-card p-4 rounded-3 h-100 position-relative overflow-hidden"> *@
+                                @*         <div class="d-flex align-items-start"> *@
+                                @*             <div class="solution-icon bg-light rounded-3 p-3 me-3 flex-shrink-0"> *@
+                                @*                 <i class="bi bi-building text-primary fs-3"></i> *@
+                                @*             </div> *@
+                                @*             <div class="flex-grow-1"> *@
+                                @*                 <h5 class="solution-title fw-semibold mb-1 text-dark">360CBS</h5> *@
+                                @*                 <p class="solution-subtitle text-primary fw-medium small mb-2">Comprehensive Business Solutions</p> *@
+                                @*                 <p class="solution-description text-muted small mb-0">Complete core banking system for modern financial institutions</p> *@
+                                @*             </div> *@
+                                @*         </div> *@
+                                @*     </div> *@
+                                @* </div> *@
+
+
+                                <div class="col d-flex align-items-start gap-2">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
+                                    <div>
+                                        <a href="#">
+                                            <strong>360CBS</strong>
+                                        </a><br><small>Jooneli</small>
+                                    </div>
+                                </div>
+                                <div class="col d-flex align-items-start gap-2">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
+                                    <div>
+                                        <a href="#">
+                                            <strong>Trading</strong>
+                                        </a><br><small>Jooneli</small>
+                                    </div>
+                                </div>
+                                <div class="col d-flex align-items-start gap-2">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
+                                    <div>
+                                        <a href="#">
+                                            <strong>Mobile Banking</strong>
+                                        </a><br><small>Jooneli</small>
+                                    </div>
+                                </div>
+                                <div class="col d-flex align-items-start gap-2">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
+                                    <div>
+                                        <a href="#">
+                                            <strong>Multidesk</strong>
+                                        </a><br><small>Jooneli</small>
+                                    </div>
+                                </div>
+                                <div class="col d-flex align-items-start gap-2">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
+                                    <div>
+                                        <a href="#">
+                                            <strong>Email Automation</strong>
+                                        </a><br><small>Jooneli</small>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Solution 2 -->
+                            @* <div class="col-lg-4"> *@
+                            @*     <div class="solution-card p-4 rounded-3 h-100 position-relative overflow-hidden"> *@
+                            @*         <div class="d-flex align-items-start"> *@
+                            @*             <div class="solution-icon bg-light rounded-3 p-3 me-3 flex-shrink-0"> *@
+                            @*                 <i class="bi bi-graph-up text-success fs-3"></i> *@
+                            @*             </div> *@
+                            @*             <div class="flex-grow-1"> *@
+                            @*                 <h5 class="solution-title fw-semibold mb-1">Trading Platform</h5> *@
+                            @*                 <p class="solution-subtitle text-success fw-medium small mb-2">Advanced Trading Solutions</p> *@
+                            @*                 <p class="solution-description text-muted small mb-0">Cutting-edge trading technology for optimal performance</p> *@
+                            @*             </div> *@
+                            @*         </div> *@
+                            @*     </div> *@
+                            @* </div> *@
+
+                            <!-- Solution 3 -->
+                            @*     <div class="col-lg-4"> *@
+                            @*         <div class="solution-card p-4 rounded-3 h-100 position-relative overflow-hidden"> *@
+                            @*             <div class="d-flex align-items-start"> *@
+                            @*                 <div class="solution-icon bg-light rounded-3 p-3 me-3 flex-shrink-0"> *@
+                            @*                     <i class="bi bi-people text-info fs-3"></i> *@
+                            @*                 </div> *@
+                            @*                 <div class="flex-grow-1"> *@
+                            @*                     <h5 class="solution-title fw-semibold mb-1">MultipleDesk</h5> *@
+                            @*                     <p class="solution-subtitle text-info fw-medium small mb-2">Workspace Management</p> *@
+                            @*                     <p class="solution-description text-muted small mb-0">Streamlined workflow management for teams</p> *@
+                            @*                 </div> *@
+                            @*             </div> *@
+                            @*         </div> *@
+                            @*     </div> *@
+                            @* </div> *@
+
+                            <!-- Call to Action -->
+                            @* <div class="row mt-5 pt-4 border-top"> *@
+                            @*     <div class="col-12"> *@
+                            @*         <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3 cta-section"> *@
+                            @*             <div> *@
+                            @*                 <h5 class="fw-semibold mb-1">Ready to get started?</h5> *@
+                            @*                 <p class="text-muted small mb-0">Discover how our solutions can transform your business</p> *@
+                            @*             </div> *@
+                            @*             <a href="#" class="btn btn-gradient px-4 py-2 fw-medium">Learn More</a> *@
+                            @*         </div> *@
+                            @*     </div> *@
+                            @* </div> *@
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link nav-link-custom fw-medium" asp-controller="Career" asp-action="Index">CAREER</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Get in Touch Button -->
+    <div class="d-none d-lg-block">
+        <a class="btn btn-outline-light btn-touch-custom px-4 py-2 fw-medium" asp-controller="Message" asp-action="Create">
+            <i class="bi bi-telephone me-2"></i>Get in Touch
+        </a>
+    </div>
+</div>

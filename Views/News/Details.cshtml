@@ -1,0 +1,20 @@
+﻿@model webjooneli.Models.Entities.NewsModel
+@{
+    ViewBag.Title = "News Details";
+
+}
+
+<h2>News Details</h2>
+
+<div>
+    <strong>Title:</strong> @Model.Title <br />
+    <strong>Content:</strong> @Model.Content <br />
+    <strong>Category:</strong> @Model.Category <br />
+    <strong>Featured:</strong> @Model.IsFeatured <br />
+    <strong>Created At:</strong> @Model.CreatedAt.ToString("g") <br />
+</div>
+
+<p>
+    <a href="@Url.Action("Edit", "News", new { id = Model.Id })" class="btn btn-warning">Edit</a>
+    <a href="@Url.Action("Index", "News")" class="btn btn-secondary">Back</a>
+</p>
