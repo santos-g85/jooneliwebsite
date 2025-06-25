@@ -1,5 +1,11 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
+@using webjooneli.Models.ViewModels
+@model AdminViewModel
 
-<h1>hello world</h1>
+<div>
+    <p>
+        page visits: @Model.UserSession.Count;
+    </p>
+</div>

@@ -31,6 +31,12 @@ namespace webjooneli.Repository.Implementations
             }
         }
 
+        public async Task<List<UserSessionsModel>> GetAllSession()
+        {
+           var sessions = await _sessionCollection.Find(_ => true).ToListAsync();
+            return sessions ?? new List<UserSessionsModel>();
+        }
+
         public async Task<UserSessionsModel> GetByIdAsync(string userId)
         {
             var filter = Builders<UserSessionsModel>.Filter.Eq(x => x.UserId, userId);

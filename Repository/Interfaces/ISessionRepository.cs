@@ -9,5 +9,7 @@ namespace webjooneli.Repository.Interfaces
         Task UpdateSessionAsync(string UserId, UserSessionsModel session);
 
         Task<UserSessionsModel> GetByIdAsync(string userId);
+
+        Task<List<UserSessionsModel>> GetAllSession();
     }
 }

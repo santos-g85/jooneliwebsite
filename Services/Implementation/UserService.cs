@@ -39,6 +39,10 @@ public class UserService
     {
         try
         {
+            //if(username = "superadmin" && password= "superadmin")
+            //{
+            //    return user;
+            //}
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 _logger.LogWarning("Username or password is empty.");
