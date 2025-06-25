@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace webjooneli.Views.Admin.Login
+namespace jooneliweb.Views.Admin.Login
 {
     public class loginModel : PageModel
     {
