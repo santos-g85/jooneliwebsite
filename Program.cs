@@ -4,6 +4,7 @@ using webjooneli.Repository.Implementations;
 using webjooneli.Repository.Interfaces;
 using webjooneli.Services.Interfaces;
 using webjooneli.Services.Implementation;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,13 +16,23 @@ builder.Services.Configure<MongoDbSettings>(
 
 builder.Services.AddSingleton<MongoDbContext>();
 
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 2048; 
+});
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+builder.Services.AddScoped<UserSessionService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IFileService, FileService>();
+
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IMessagesRepository,MessagesRepository>();
 builder.Services.AddScoped<IJobOpeningRepository, JobOpeningRepository>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
-builder.Services.AddScoped<IFileService,FileService>();
-builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<ICVUploadRepository, CVUploadRepository>();
 
 
@@ -35,9 +46,20 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "_gu";
+    options.IdleTimeout = TimeSpan.FromSeconds(30);
+    options.Cookie.IsEssential = true; 
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error/HandleException");
@@ -59,6 +81,7 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSession();
 
 app.MapControllerRoute(
     name: "hiddenadmin",

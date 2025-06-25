@@ -1,12 +1,8 @@
-﻿using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Formats.Webp;
-using MongoDB.Driver.GridFS;
-using MongoDB.Bson;
-using webjooneli.Models.Entities;
+﻿using webjooneli.Models.Entities;
 using webjooneli.Repository.Interfaces;
 using MongoDB.Driver;
 using webjooneli.Settings;
+using webjooneli.Services.Interfaces;
 
 
 namespace webjooneli.Repository.Implementations
@@ -15,67 +11,63 @@ namespace webjooneli.Repository.Implementations
     {
         private readonly ILogger<NewsRepository> _logger;
         private readonly IMongoCollection<NewsModel> _newscollection;
-        private readonly GridFSBucket _gridFS;
-
-        public NewsRepository(MongoDbContext dbContext, ILogger<NewsRepository> logger)
+        private readonly IImageService _imageService;
+        public NewsRepository(MongoDbContext dbContext, ILogger<NewsRepository> logger,IImageService imageService)
         {
             var collectionname = nameof(NewsModel).Replace("Model", "");
             _newscollection = dbContext.GetCollection<NewsModel>(collectionname);
             _logger = logger;
-            _gridFS = dbContext.GridFsBucket;
+            _imageService = imageService;
         }
+
         public async Task CreateNewsAsync(NewsModel news, IFormFile imageFile)
         {
+            _logger.LogInformation("news arrived in news repo!");
             try
             {
-                _logger.LogInformation($"Creating news with title: {news.Title}");
                 if (imageFile != null && imageFile.Length > 0)
                 {
-                    using var inputStream = imageFile.OpenReadStream();
-
-                    // Load image using ImageSharp
-                    using var image = await Image.LoadAsync(inputStream);
-                    _logger.LogInformation("Image loaded successfully: {FileName}", imageFile.FileName);
-                    // Optional: Resize/compress
-                    image.Mutate(x => x.Resize(new ResizeOptions
-                    {
-                        Mode = ResizeMode.Max,
-                        Size = new Size(1200, 800)
-                    }));
-
-                    // Save as WebP
-                    using var webpStream = new MemoryStream();
-                    await image.SaveAsWebpAsync(webpStream, new WebpEncoder
-                    {
-                        Quality = 75
-                    });
-                    _logger.LogInformation("Image converted to WebP format successfully: {FileName}", imageFile.FileName);
-                    webpStream.Position = 0;
-
-                    var fileId = await _gridFS.UploadFromStreamAsync(
-                        $"{Path.GetFileNameWithoutExtension(imageFile.FileName)}.webp",
-                        webpStream,
-                        new GridFSUploadOptions
-                        {
-                            Metadata = new BsonDocument
-                            {
-                        { "ContentType", "image/webp" }
-                            }
-                        });
-
-                    news.ImageId = fileId.ToString();
+                    var imageId = await _imageService.UploadImageAsync(imageFile);
+                    _logger.LogInformation($"sending image of {imageId} to imageservice!");
+                    news.ImageId = imageId;
+                }
+                else
+                {
+                    _logger.LogWarning("No image file uploaded");
                 }
 
+                _logger.LogInformation($"Creating news with imageId: {news.ImageId}");
                 await _newscollection.InsertOneAsync(news);
-                _logger.LogInformation("News with WebP image saved to GridFS.");
+                _logger.LogInformation("Successfully created news!");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error saving news");
-                throw; // Re-throw or handle as needed
+                _logger.LogError($"{ex.Message}");
+                throw;
             }
         }
 
+
+        //public async Task CreateNewsAsync(NewsModel news)
+        //{
+        //    _logger.LogInformation($"crating news{news.Title}");
+        //    try
+        //    {
+        //        //if (imageFile != null && imageFile.Length > 0)
+        //        //{
+        //        //    var imageid = await _imageService.UploadImageAsync(imageFile);
+        //        //    news.ImageId = imageid;
+        //        //}
+        //       // _logger.LogInformation($"Creating news with imageid: {news.ImageId}");
+        //        await _newscollection.InsertOneAsync(news);
+        //        _logger.LogInformation("Successfully create news!");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"{ex.Message}");
+        //        throw;
+        //    }
+        //}
 
         public async Task DeleteNewsAsync(string id)
         {

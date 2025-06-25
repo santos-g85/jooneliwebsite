@@ -3,6 +3,6 @@
     public interface IImageService
     {
         Task<string> UploadImageAsync(IFormFile imageFile);
-        Task<byte[]> DownloadImageAsync(string fileId);
+        //Task<byte[]> DownloadImageAsync(string fileId);
     }
 }

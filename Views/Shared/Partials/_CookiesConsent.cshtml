@@ -1,0 +1,63 @@
+﻿@* <!-- Cookie Consent Banner -->
+<div id="cookieConsentBanner" style="position: fixed; bottom: 0px; width: 100%; background-color: rgba(0, 0, 0, 0.8); color: white; text-align: center; padding: 10px; z-index: 9999;">
+    We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies.
+    <button id="acceptCookiesBtn" onclick="acceptCookies()" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; font-size: 14px;">
+        Accept
+    </button>
+
+    <button id="acceptCookiesBtn" onclick="rejectCookies()" style="padding: 5px 10px; background-color: red; color: white; border: none; cursor: pointer; font-size: 14px;">
+        Reject
+    </button>
+</div>
+
+
+<script>
+    function acceptCookies() {
+        // Set a cookie to track consent
+        document.cookie = "cookieConsent=true; expires=" + new Date(Date.now() + 31536000000).toUTCString() + "; path=/";
+        // Hide the banner
+        document.getElementById('cookieConsentBanner').style.display = 'none';
+        // Optionally, load Google Analytics script here if not already loaded
+        loadGoogleAnalytics();
+    }
+
+     function rejectCookies() {
+        // Set a cookie to track consent
+        document.cookie = "cookieConsent=false; expires=" + new Date(Date.now() + 31536000000).toUTCString() + "; path=/";
+        // Hide the banner
+        document.getElementById('cookieConsentBanner').style.display = 'none';
+        // Optionally, load Google Analytics script here if not already loaded
+        loadGoogleAnalytics();
+    }
+
+    function loadGoogleAnalytics() {
+        var script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-J3CMH0V42N'; 
+        script.async = true;
+        document.head.appendChild(script);
+        script.onload = function () {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-J3CMH0V42N'); 
+        };
+    }
+
+    // Check if the user has already consented
+    function checkCookieConsent() {
+        var consent = document.cookie.split(';').some(function(item) {
+            return item.trim().startsWith('cookieConsent=true');
+        });
+
+        if (consent) {
+            loadGoogleAnalytics(); // If consent is already given, load GA
+            document.getElementById('cookieConsentBanner').style.display = 'none'; // Hide banner if consented
+        }
+    }
+
+    // Run the consent check on page load
+    window.onload = checkCookieConsent;
+</script>
+  *@

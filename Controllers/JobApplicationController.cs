@@ -19,9 +19,15 @@ namespace webjooneli.Controllers
         // GET: JobApplication/Create
         public IActionResult Create()
         {
-            var jobOpenings = _jobOpeningRepository.GetAllJobOpeningsAsync().Result;
-            ViewBag.JobOpenings = jobOpenings;  // Pass to View for dropdown
-            return View();
+
+            var jobOpenings = _jobOpeningRepository.GetAllJobOpeningsAsync(); 
+            //var model = new JobApplicationModel
+            //{
+            //     FullName= jobOpenings.FullName,
+                 
+            //};
+
+            return View(jobOpenings);
         }
 
         // POST: JobApplication/Create

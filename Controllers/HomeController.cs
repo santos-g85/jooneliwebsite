@@ -1,22 +1,24 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using webjooneli.Models.ViewModels;
+using webjooneli.Services.Implementation;
 
 namespace webjooneli.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserSessionService _sessionservice;
+        public HomeController(ILogger<HomeController> logger, UserSessionService sessionService)
         {
             _logger = logger;
+           _sessionservice = sessionService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-           return View();
+            await _sessionservice.EnsureSession();
+            return View();
         }
 
         public IActionResult Privacy()

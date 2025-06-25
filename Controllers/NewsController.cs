@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using webjooneli.Models.Entities;
 using webjooneli.Repository.Interfaces;
+using webjooneli.Services.Implementation;
 
 namespace webjooneli.Controllers
 {
@@ -9,7 +10,6 @@ namespace webjooneli.Controllers
     {
         private readonly INewsRepository _newsRepository;
         private readonly ILogger<NewsController> _logger;
-
         public NewsController(INewsRepository newsRepository, ILogger<NewsController> logger)
         {
             _newsRepository = newsRepository;
@@ -58,15 +58,15 @@ namespace webjooneli.Controllers
         // POST: /News/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NewsModel news, IFormFile imageFile)
+        public async Task<IActionResult> Create(NewsModel news, IFormFile image)
         {
-            _logger.LogInformation("attempting to save news and image");
-            if (!ModelState.IsValid)
-                return View(news);
+            _logger.LogInformation("Trying to create news!");
+            //if (!ModelState.IsValid)
+            //    return View(news);
             try
             {
                 news.CreatedAt = DateTime.UtcNow;
-                await _newsRepository.CreateNewsAsync(news, imageFile);
+                await _newsRepository.CreateNewsAsync(news,image);
                 _logger.LogInformation("News created successfully with title: {Title}", news.Title);
                 return RedirectToAction(nameof(Index));
             }
