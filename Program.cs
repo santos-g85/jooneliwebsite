@@ -60,6 +60,8 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
+
+
 //// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -75,7 +77,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseMaintenanceMode();
 
 app.UseRouting();
 app.UseStatusCodePagesWithReExecute("/Error/{0}");

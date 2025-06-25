@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using webjooneli.Models.Entities;
 
 [Route("Error")]
 public class ErrorController : Controller
@@ -50,27 +51,11 @@ public class ErrorController : Controller
         return View("GenericError");
     }
 
-    [Route("maintenance/toggle/{status}")]
-    public IActionResult Maintenance(string status)
+    [HttpGet("maintenance")]
+    public IActionResult ToggleMaintenance(bool enabled)
     {
-        if (status != "on" && status != "off")
-        {
-            return BadRequest("Invalid status. Use 'on' or 'off'.");
-        }
-        MaintenanceService.IsMaintenaceActive = status == "on";
-        _logger.LogInformation($"switch toggled to: {status}");
-        return RedirectToAction("Index", "Home"); 
+        SiteSettings.IsMaintenanceMode = enabled;
+        return Ok($"Maintenance Mode is now {(enabled ? "ENABLED" : "DISABLED")}");
     }
 }
 
-public static class MaintenanceService
-{
-    private static bool _isMaintenanceActive = false;
-
-    public static bool IsMaintenaceActive
-    {
-        get => _isMaintenanceActive;
-        set => _isMaintenanceActive = value;
-    }
-
-}
