@@ -1,0 +1,73 @@
+﻿/* Navbar Background Animation Styles */
+.navbar-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: white;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container.animate-bg .navbar-bg-overlay {
+    background-color: white;
+}
+
+
+.navbar-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Mega Dropdown Container */
+.mega-dropdown-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+    .mega-dropdown-container.show {
+        max-height: 400px; /* Adjust based on your content */
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.mega-dropdown {
+    padding: 2rem 0;
+    background: white;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Navbar text color transitions */
+.nav-link-custom {
+    color: white !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-container.animate-bg .nav-link-custom {
+    color: #1f2937 !important;
+}
+
+.navbar-container.animate-bg .navbar-brand-text {
+    color: #1f2937 !important;
+}
+
+
+/* Mobile Toggle */
+.navbar-toggler-icon-custom {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.navbar-container.animate-bg .navbar-toggler-icon-custom {
+    color: #1f2937 !important;
+}

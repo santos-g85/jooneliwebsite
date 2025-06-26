@@ -1,0 +1,35 @@
+﻿<div class="offcanvas offcanvas-start" style="width:75%;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header">
+        <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center text-decoration-none">
+            <div class="logo-icon bg-gradient d-flex align-items-center justify-content-center rounded-3 me-3">
+                <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:60px; width:60px" />
+            </div>
+        </a>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-dark fs-5 py-3" asp-controller="About" asp-action="Index">ABOUT US</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link text-dark fs-5 py-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    SOLUTIONS
+                </a>
+                <ul class="dropdown-menu border-0">
+                    <li><a class="dropdown-item py-2" href="#">Solution 1</a></li>
+                    <li><a class="dropdown-item py-2" href="#">Solution 2</a></li>
+                    <li><a class="dropdown-item py-2" href="#">Solution 3</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item py-2" asp-controller="Business" asp-action="Index">All Solutions</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark fs-5 py-3" asp-controller="Career" asp-action="Index">CAREER</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark fs-5 py-3" asp-controller="Message" asp-action="Create">GET IN TOUCH</a>
+            </li>
+        </ul>
+    </div>
+</div>

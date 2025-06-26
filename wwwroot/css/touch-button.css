@@ -1,0 +1,29 @@
+﻿/* This will style the touch button when either:
+   - The navbar background is active (animate-bg class), OR
+   - The mega dropdown is being shown (show class) */
+.navbar-container.animate-bg .btn-touch-custom,
+.mega-dropdown-container.show ~ .container-fluid .btn-touch-custom {
+    border-color: #dc3545 !important;
+    color: #dc3545 !important;
+}
+
+    /* Hover state for the button in these conditions */
+    .navbar-container.animate-bg .btn-touch-custom:hover,
+    .mega-dropdown-container.show ~ .container-fluid .btn-touch-custom:hover {
+        background-color: #dc3545 !important;
+        color: white !important;
+    }
+
+/* Default state for the button */
+.btn-touch-custom {
+    border-color: white !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+    /* Hover state for default button */
+    .btn-touch-custom:hover {
+        background-color: white !important;
+        color: black !important;
+        transform: scale(1.05);
+    }

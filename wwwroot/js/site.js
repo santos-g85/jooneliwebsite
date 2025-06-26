@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const megaDropdownContainer = document.querySelector('.mega-dropdown-container');
     const navLinks = document.querySelectorAll('.nav-link-custom');
     const header = document.querySelector('header'); // Added header reference
+    const touchbutton = document.querySelector('btn-touch-custom');
 
     let isHoveringNavLink = false;
     let isHoveringDropdown = false;
