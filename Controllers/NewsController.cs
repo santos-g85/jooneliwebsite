@@ -54,6 +54,8 @@ namespace webjooneli.Controllers
             return View();
         }
 
+
+        [RequestSizeLimit(104857600)]
         [Authorize(Roles = "Admin")]
         // POST: /News/Create
         [HttpPost]
@@ -61,8 +63,7 @@ namespace webjooneli.Controllers
         public async Task<IActionResult> Create(NewsModel news, IFormFile image)
         {
             _logger.LogInformation("Trying to create news!");
-            //if (!ModelState.IsValid)
-            //    return View(news);
+           
             try
             {
                 news.CreatedAt = DateTime.UtcNow;

@@ -65,24 +65,21 @@
         </script>
     }
 
-    @* <h2 class="d-flex justify-content-center">Current Openings</h2> *@
-    @* <hr /> *@
-
-    @* <h2 class="text-center mt-5 fw-bold">Current Openings</h2> *@
+   
     <h1 class="text-center fw-bold mt-5" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
         Current Openings
     </h1>
     <hr class="mx-auto" style="width: 80px; border-top: 3px solid ;" />
 
-    @* @await Html.PartialAsync("~/Views/Home/Career/_JobOpenings.cshtml", Model.JobOpenings) *@
 
     @if (Model.JobOpenings != null && Model.JobOpenings.Any()) 
-    { 
-        @await Html.PartialAsync("~/Views/Career/_JobOpenings.cshtml", Model.JobOpenings) 
+    {
+    <p class="text-center mb-4">No job openings available at the moment.</p>
+       @*  @await Html.PartialAsync("~/Views/Career/_JobOpenings.cshtml", Model.JobOpenings)  *@
     }
     else 
-     { 
-        <p>No job openings available at the moment.</p> 
+     {
+        <p class="text-center mb-4">No job openings available at the moment.</p>  
      } 
 
     <!-- Registration Modal -->

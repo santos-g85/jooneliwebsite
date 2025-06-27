@@ -12,7 +12,7 @@
 
     // Heights for different states
     const NAVBAR_HEIGHT = 80; // Height of navbar in pixels
-    const MEGADROPDOWN_HEIGHT = 250; // Height of mega dropdown in pixels
+    const MEGADROPDOWN_HEIGHT = 400; // Height of mega dropdown in pixels
 
   
     // Function to set background height

@@ -1,97 +1,4 @@
-﻿@* <div class="container-fluid px-4 px-lg-5">
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
-        <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:75px; width:60px" />
-    </a>
-
-    <!-- Mobile Toggle -->
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
-        <i class="bi bi-list fs-4 navbar-toggler-icon-custom"></i>
-    </button>
-
-    <!-- Desktop Navigation -->
-    <div class="navbar-collapse collapse d-lg-flex justify-content-center">
-        <ul class="navbar-nav gap-4">
-            <li class="nav-item">
-                <a class="nav-link nav-link-custom fw-medium" asp-controller="About" asp-action="Index">ABOUT US</a>
-            </li>
-
-            <!-- Solutions Dropdown -->
-            <li class="nav-item dropdown position-static solutions-dropdown">
-                <a class="nav-link nav-link-custom fw-medium dropdown-toggle-custom d-flex align-items-center"
-                   asp-controller="Business" asp-action="Index" role="button">
-                    SOLUTIONS
-                    @* <i class="bi bi-chevron-down ms-1 dropdown-arrow"></i> *@
-               @*  </a>
-                <!-- Mega Dropdown -->
-                <div class="mega-dropdown-container position-absolute w-100">
-                    <div class="mega-dropdown bg-white shadow-lg border-top">
-                        <div class="container-fluid px-4 px-lg-5 py-5">
-                            <div class="row g-4">
-                    
-                                <div class="col d-flex align-items-start gap-2">
-                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
-                                    <div>
-                                        <a href="#">
-                                            <strong>360CBS</strong>
-                                        </a><br><small>Jooneli</small>
-                                    </div>
-                                </div>
-                                <div class="col d-flex align-items-start gap-2">
-                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
-                                    <div>
-                                        <a href="#">
-                                            <strong>Trading</strong>
-                                        </a><br><small>Jooneli</small>
-                                    </div>
-                                </div>
-                                <div class="col d-flex align-items-start gap-2">
-                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
-                                    <div>
-                                        <a href="#">
-                                            <strong>Mobile Banking</strong>
-                                        </a><br><small>Jooneli</small>
-                                    </div>
-                                </div>
-                                <div class="col d-flex align-items-start gap-2">
-                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
-                                    <div>
-                                        <a href="#">
-                                            <strong>Multidesk</strong>
-                                        </a><br><small>Jooneli</small>
-                                    </div>
-                                </div>
-                                <div class="col d-flex align-items-start gap-2">
-                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="" width="32" height="32">
-                                    <div>
-                                        <a href="#">
-                                            <strong>Email Automation</strong>
-                                        </a><br><small>Jooneli</small>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
- *@@* 
-            <li class="nav-item">
-                <a class="nav-link nav-link-custom fw-medium" asp-controller="Career" asp-action="Index">CAREER</a>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Get in Touch Button -->
-    <div class="d-none d-lg-block">
-        <a class="btn btn-outline-light btn-touch-custom px-4 py-2 fw-medium" asp-controller="Message" asp-action="Create">
-            Get in Touch
-        </a>
-    </div>
-</div>  *@
-
-
-<div class="container-fluid px-4 px-lg-5">
+﻿<div class="container-fluid px-4 px-lg-5">
     <!-- Logo -->
     <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
         <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:75px; width:60px" />
@@ -106,17 +13,17 @@
         <ul class="navbar-nav gap-4">
             <!-- Other nav items -->
             <li class="nav-item">
-                <a class="nav-link nav-link-custom" asp-controller="About" asp-action="Index">ABOUT</a>
+                <a class="nav-link nav-link-custom fs-6 " asp-controller="About" asp-action="Index">ABOUT</a>
             </li>
             <!-- Solutions Dropdown -->
             <li class="nav-item dropdown solutions-dropdown">
-                <a class="nav-link nav-link-custom " asp-controller="Business" asp-action="Index">
+                <a class="nav-link nav-link-custom fs-6 " asp-controller="Business" asp-action="Index">
                     SOLUTIONS
                 </a>
             </li>
             <!-- Regular nav items -->
             <li class="nav-item">
-                <a class="nav-link nav-link-custom" asp-controller="Career" asp-action="Index">CAREER</a>
+                <a class="nav-link nav-link-custom fs-6 " asp-controller="Career" asp-action="Index">CAREER</a>
             </li>
         </ul>
     </div>
@@ -135,25 +42,69 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <h5>360 Core Banking System</h5>
-                        <ul>
-                            <li><a href="#">Solution 1</a></li>
-                            <li><a href="#">Solution 2</a></li>
+                        <h5>Corporate Digital Banking</h5>
+                        <ul class="list-unstyled">
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">
+                                    <span class="me-3">360 CBS</span>
+                                </a>
+                            </li>
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">
+                                    <span class="me-3">Mobile Banking</span>
+                                </a>
+                            </li>
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">
+                                    <span class="me-3">ATM Banking</span>
+                                </a>
+                            </li>
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">
+                                    <span class="me-3">Mobile Teller</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <!-- More columns as needed -->
                     <div class="col-md-4">
                         <h5>Trading System</h5>
-                        <ul>
-                            <li><a href="#">Solution 3</a></li>
-                            <li><a href="#">Solution 2</a></li>
+                        <ul class="list-unstyled">
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">
+                                    <span class="me-3">Trading System</span>
+                                </a>
+ 
+                            </li>
+
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60" class="me-2">
+                                    <span class="me-3">ERP Mobile</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-4">
                         <h5>Automation</h5>
-                        <ul>
-                            <li><a href="#">Solution 1</a></li>
-                            <li><a href="#">Solution 2</a></li>
+                        <ul class="list-unstyled">
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="http://multipledesk.com/" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/logohere.png" alt="Jooneli Logo" width="60"  class="me-2">
+                                    <span class="me-3">MultipleDesk - Remote Access</span>
+                                </a>
+                            </li>
+                            <li class="text-decoration-none list-unstyled">
+                                <a href="#" class="text-decoration-none d-flex align-items-center">
+                                    <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60" class="me-2">
+                                    <span class="me-3">Email Automation</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -18,14 +18,19 @@ namespace webjooneli.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var userSessions = await _sessionRepository.GetAllSession(); 
+        //    var viewModel = new AdminViewModel
+        //    {
+        //        UserSession = userSessions
+        //    };
+        //    return View(viewModel);
+        //}
+        public IActionResult Index()
         {
-            var userSessions = await _sessionRepository.GetAllSession(); 
-            var viewModel = new AdminViewModel
-            {
-                UserSession = userSessions
-            };
-            return View(viewModel);
+            
+            return View();
         }
     }
 }
