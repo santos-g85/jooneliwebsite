@@ -1,7 +1,7 @@
 ﻿<div class="container-fluid px-4 px-lg-5">
     <!-- Logo -->
     <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
-        <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:75px; width:60px" />
+        <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:75px; width:100px;" />
     </a>
 
     <!-- Mobile Toggle -->
@@ -17,7 +17,7 @@
             </li>
             <!-- Solutions Dropdown -->
             <li class="nav-item dropdown solutions-dropdown">
-                <a class="nav-link nav-link-custom fs-6 " asp-controller="Business" asp-action="Index">
+                <a class="nav-link nav-link-custom fs-6 " asp-controller="Solutions" asp-action="Index">
                     SOLUTIONS
                 </a>
             </li>
@@ -25,12 +25,16 @@
             <li class="nav-item">
                 <a class="nav-link nav-link-custom fs-6 " asp-controller="Career" asp-action="Index">CAREER</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link nav-link-custom fs-6 " asp-controller="News" asp-action="Index">NEWS</a>
+            </li>
         </ul>
     </div>
 
     <!-- Get in Touch Button -->
     <div class="d-none d-lg-block">
-        <a class="btn btn-touch-custom btn-outline-light px-4 py-2 fw-medium" asp-controller="Message" asp-action="Create">
+        <a class="btn btn-touch-custom btn-outline-light px-4 py-2 fw-medium" asp-controller="Message" asp-action="Index">
             Get in Touch
         </a>
     </div>

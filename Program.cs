@@ -9,8 +9,11 @@ using Microsoft.AspNetCore.Http.Features;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-
+builder.Services.AddControllersWithViews(options =>
+{
+    // Add the custom filter globally
+    //options.Filters.Add<Unauthenticated404Filter>();
+});
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
 
@@ -22,6 +25,12 @@ builder.Services.Configure<FormOptions>(options =>
 });
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 5242880;
+    options.MultipartBodyLengthLimit = FileService.MaxFileSizeBytes;
+});
 
 builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<UserSessionService>();
@@ -60,13 +69,11 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-
-
 //// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-   // app.UseExceptionHandler("/Error/HandleException");
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error/HandleException");
+    //app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -77,10 +84,13 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseMaintenanceMode();
 
 app.UseRouting();
-//app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
 app.UseAuthentication();
 app.UseAuthorization();
 

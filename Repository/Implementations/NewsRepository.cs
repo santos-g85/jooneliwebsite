@@ -11,31 +11,28 @@ namespace webjooneli.Repository.Implementations
     {
         private readonly ILogger<NewsRepository> _logger;
         private readonly IMongoCollection<NewsModel> _newscollection;
+        private readonly IMongoCollection<NewsSubscriptionModel> _newsSubscription;
         private readonly IImageService _imageService;
-        public NewsRepository(MongoDbContext dbContext, ILogger<NewsRepository> logger,IImageService imageService)
+
+        public NewsRepository(MongoDbContext dbContext, 
+            ILogger<NewsRepository> logger,
+            IImageService imageService)
         {
             var collectionname = nameof(NewsModel).Replace("Model", "");
             _newscollection = dbContext.GetCollection<NewsModel>(collectionname);
+
+            var subsription = nameof(NewsSubscriptionModel).Replace("Model", "");
+            _newsSubscription = dbContext.GetCollection<NewsSubscriptionModel>(subsription);
+
             _logger = logger;
             _imageService = imageService;
         }
 
-        public async Task CreateNewsAsync(NewsModel news, IFormFile imageFile)
+        public async Task CreateNewsAsync(NewsModel news)
         {
             _logger.LogInformation("news arrived in news repo!");
             try
             {
-                if (imageFile != null && imageFile.Length > 0)
-                {
-                    var imageId = await _imageService.UploadImageAsync(imageFile);
-                    _logger.LogInformation($"sending image of {imageId} to imageservice!");
-                    news.ImageId = imageId;
-                }
-                else
-                {
-                    _logger.LogWarning("No image file uploaded");
-                }
-
                 _logger.LogInformation($"Creating news with imageId: {news.ImageId}");
                 await _newscollection.InsertOneAsync(news);
                 _logger.LogInformation("Successfully created news!");
@@ -46,30 +43,8 @@ namespace webjooneli.Repository.Implementations
                 throw;
             }
         }
-
-
-        //public async Task CreateNewsAsync(NewsModel news)
-        //{
-        //    _logger.LogInformation($"crating news{news.Title}");
-        //    try
-        //    {
-        //        //if (imageFile != null && imageFile.Length > 0)
-        //        //{
-        //        //    var imageid = await _imageService.UploadImageAsync(imageFile);
-        //        //    news.ImageId = imageid;
-        //        //}
-        //       // _logger.LogInformation($"Creating news with imageid: {news.ImageId}");
-        //        await _newscollection.InsertOneAsync(news);
-        //        _logger.LogInformation("Successfully create news!");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"{ex.Message}");
-        //        throw;
-        //    }
-        //}
-
-        public async Task DeleteNewsAsync(string id)
+ 
+       public async Task DeleteNewsAsync(string id)
         {
             try {
                 var filter = Builders<NewsModel>.Filter.Eq(n => n.Id, id);
@@ -161,6 +136,35 @@ namespace webjooneli.Repository.Implementations
                 throw;
             }
 
+        }
+
+        public async Task CreateSubscription(NewsSubscriptionModel usermail)
+        {
+            var filter = Builders<NewsSubscriptionModel>.Filter.Eq(e => e.Email, usermail.Email);
+            var useremail = await _newsSubscription.Find(filter).FirstOrDefaultAsync();
+
+            if (useremail == null)
+            {
+                var usermailinfo = new NewsSubscriptionModel
+                {
+                    Email = usermail.Email, 
+                    Subscribed = DateTime.Now,
+                };
+                try
+                {
+                    await _newsSubscription.InsertOneAsync(usermailinfo);
+                    _logger.LogInformation("Subscription created successfully!");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Error: {ex.Message}");
+                    throw;
+                }
+            }
+            else
+            {
+                _logger.LogInformation("Email already subscribed!");
+            }
         }
     }
 }

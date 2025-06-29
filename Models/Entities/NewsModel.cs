@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using webjooneli.Models.Enums;
 
 namespace webjooneli.Models.Entities
 {
@@ -7,7 +8,7 @@ namespace webjooneli.Models.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [BsonRequired]
         [BsonElement("Title")]
@@ -18,7 +19,7 @@ namespace webjooneli.Models.Entities
         public string Content { get; set; }
 
         [BsonElement("Category")]
-        public string Category { get; set; }
+        public NewsCategory Category { get; set; }
 
         public string? ImageId { get; set; }
 

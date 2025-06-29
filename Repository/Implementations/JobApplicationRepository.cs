@@ -11,7 +11,9 @@ namespace webjooneli.Repository.Implementations
         private readonly ILogger<JobApplicationRepository> _logger;
         private readonly IJobOpeningRepository _jobOpeningCollection;
 
-        public JobApplicationRepository(MongoDbContext mongoDbContext, ILogger<JobApplicationRepository> logger, IJobOpeningRepository jobOpeningRepository)
+        public JobApplicationRepository(MongoDbContext mongoDbContext, 
+            ILogger<JobApplicationRepository> logger,
+            IJobOpeningRepository jobOpeningRepository)
         {
             var applicationCollectionName = nameof(JobApplicationModel).Replace("Model", "");
             _applicationCollection = mongoDbContext.GetCollection<JobApplicationModel>(applicationCollectionName);
@@ -26,10 +28,12 @@ namespace webjooneli.Repository.Implementations
             return await _applicationCollection.Find(filter).FirstOrDefaultAsync();
         }
 
+
         public async Task<List<JobApplicationModel>> GetAllApplicationsAsync()
         {
             return await _applicationCollection.Find(_ => true).ToListAsync();
         }
+
 
         public async Task CreateApplicationAsync(JobApplicationModel application)
         {
@@ -43,11 +47,13 @@ namespace webjooneli.Repository.Implementations
             // Add the job application
             await _applicationCollection.InsertOneAsync(application);
         } 
+
        public async Task DeleteApplicationAsync(string id)
         {
             var filter = Builders<JobApplicationModel>.Filter.Eq(a => a.Id, id);
             await _applicationCollection.DeleteOneAsync(filter);
         }
+
 
         public async Task<JobOpeningModel> GetJobOpeningByJobOpeningIdAsync(string JobOpeningId)
         {

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<webjooneli.Models.Entities.CVUploadModel>
+
+@{
+    ViewData["Title"] = "CV Uploads";
+    Layout = "_AdminLayout";
+}
+
+<h1>List of CV Uploads</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">
+        No CVs have been uploaded yet.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Upload Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cv in Model)
+            {
+                <tr>
+                    <td>@cv.Name</td>
+                    <td>@cv.Email</td>
+                    <td>@cv.ContactNumber</td>
+                    <td>@cv.CreatedAt.ToString("g")</td>
+                    <td>
+                        <a href="@Url.Action("DownloadCVFile", "Career", new { filePath = cv.CVFileId })" class="btn btn-success">Download</a>
+                        <a href="@Url.Action("DeleteCV", "Career", new { Id = cv.Id })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} 

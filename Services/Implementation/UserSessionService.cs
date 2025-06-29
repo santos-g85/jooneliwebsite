@@ -24,12 +24,13 @@ namespace webjooneli.Services.Implementation
         private readonly ISessionRepository _sessionRepository;
         private const string SessionKey = "UserSession";
 
-        public UserSessionService(IHttpContextAccessor accessor, ISessionRepository sessionRepository)
+        public UserSessionService(IHttpContextAccessor accessor, 
+            ISessionRepository sessionRepository)
         {
             _httpContextAccessor = accessor;
             _sessionRepository = sessionRepository;
         }
-        public async Task<UserSessionsModel> EnsureSession()
+        public  Task<UserSessionsModel> EnsureSession()
         {
             var context = _httpContextAccessor?.HttpContext;
             var session = context?.Session;
@@ -50,17 +51,17 @@ namespace webjooneli.Services.Implementation
                     ExpiresAt = DateTime.UtcNow.AddMinutes(30).ToString("o"),
                     LastVisited = DateTime.UtcNow
                 };
-                await _sessionRepository.CreateSessionAsync(userData);
+                //await _sessionRepository.CreateSessionAsync(userData);
             }
             else
             {
                 userData.LastVisited = DateTime.UtcNow;
-                await _sessionRepository.UpdateSessionAsync(userData.UserId, userData);
+                //await _sessionRepository.UpdateSessionAsync(userData.UserId, userData);
             }
 
             session.SetObject(SessionKey, userData);
 
-            return userData;
+            return null;
         }
     }
 }

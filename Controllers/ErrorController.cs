@@ -11,8 +11,6 @@ public class ErrorController : Controller
         _logger = logger;
     }
 
-   
-
     [Route("404")]
     public IActionResult Error404()
     {

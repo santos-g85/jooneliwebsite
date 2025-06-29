@@ -11,22 +11,14 @@ namespace webjooneli.Controllers
     {
         private readonly ISessionRepository _sessionRepository;
         private ILogger<AdminController> _logger;
-        public AdminController(ILogger<AdminController> logger,ISessionRepository sessionRepository)
+        public AdminController(ILogger<AdminController> logger,
+            ISessionRepository sessionRepository)
         {
             _logger = logger;
             _sessionRepository = sessionRepository;
         }
 
         [Authorize(Roles = "Admin")]
-        //public async Task<IActionResult> Index()
-        //{
-        //    var userSessions = await _sessionRepository.GetAllSession(); 
-        //    var viewModel = new AdminViewModel
-        //    {
-        //        UserSession = userSessions
-        //    };
-        //    return View(viewModel);
-        //}
         public IActionResult Index()
         {
             

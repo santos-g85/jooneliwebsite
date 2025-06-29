@@ -9,8 +9,9 @@ namespace webjooneli.Repository.Interfaces
 
         Task<List<NewsModel>> GetNewsByDateAsync();
         Task<NewsModel> GetNewsByIdAsync(string id);
-        Task CreateNewsAsync(NewsModel news,IFormFile imageFile);
+        Task CreateNewsAsync(NewsModel news);
         Task UpdateNewsAsync(string id, NewsModel updatedNews);
         Task DeleteNewsAsync(string id);
+        Task CreateSubscription(NewsSubscriptionModel usermail);
     }
 }

@@ -1,0 +1,61 @@
+﻿<div class="card  bg-secondary-subtle border-0 shadow-sm">
+    <div class="card-body">
+        <h3 class="h5 card-title mb-3">Newsletter</h3>
+        <p class="text-muted small mb-3">Stay updated with our latest news</p>
+        <form method="post" asp-action="Subscribe" asp-controller="News">
+            <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Your email address" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+        </form>
+
+    </div>
+</div>
+
+<!-- Toast -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-white bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @TempData["SuccessMessage"]
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+        var toastElement = document.getElementById('liveToast');
+        if (toastElement) {
+        var toast = new bootstrap.Toast(toastElement);
+        toast.show();
+        }
+        });
+    </script>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-white bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @TempData["ErrorMessage"]
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+        var toastElement = document.getElementById('liveToast');
+        if (toastElement) {
+        var toast = new bootstrap.Toast(toastElement);
+        toast.show();
+        }
+        });
+    </script>
+}

@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using webjooneli.Models.ViewModels;
+using webjooneli.Repository.Implementations;
+using webjooneli.Repository.Interfaces;
 using webjooneli.Services.Implementation;
 
 namespace webjooneli.Controllers
@@ -8,17 +10,17 @@ namespace webjooneli.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserSessionService _sessionservice;
-        public HomeController(ILogger<HomeController> logger, UserSessionService sessionService)
+        private readonly INewsRepository _newsRepository;
+        public HomeController(ILogger<HomeController> logger,INewsRepository newsRepository)
         {
             _logger = logger;
-           _sessionservice = sessionService;
+            _newsRepository = newsRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            await _sessionservice.EnsureSession();
-            return View();
+            var news = await _newsRepository.GetAllNewsAsync();
+            return View(news);
         }
 
         public IActionResult Privacy()

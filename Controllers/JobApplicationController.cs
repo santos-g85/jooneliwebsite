@@ -9,7 +9,8 @@ namespace webjooneli.Controllers
         private readonly IJobApplicationRepository _applicationRepository;
         private readonly IJobOpeningRepository _jobOpeningRepository;
 
-        public JobApplicationController(IJobApplicationRepository applicationRepository, IJobOpeningRepository jobOpeningRepository)
+        public JobApplicationController(IJobApplicationRepository applicationRepository,
+            IJobOpeningRepository jobOpeningRepository)
         {
             _applicationRepository = applicationRepository;
             _jobOpeningRepository = jobOpeningRepository;
@@ -39,7 +40,6 @@ namespace webjooneli.Controllers
             {
                 try
                 {
-                    // Create the job application
                     await _applicationRepository.CreateApplicationAsync(application);
                     TempData["SuccessMessage"] = "Your application has been submitted successfully!";
                     return RedirectToAction(nameof(Index));
@@ -49,8 +49,6 @@ namespace webjooneli.Controllers
                     TempData["ErrorMessage"] = "An error occurred: " + ex.Message;
                 }
             }
-
-            // If validation failed, or on error, return to Create view with existing job openings
             var jobOpenings = await _jobOpeningRepository.GetAllJobOpeningsAsync();
             ViewBag.JobOpenings = jobOpenings;
             return View(application);
@@ -60,7 +58,6 @@ namespace webjooneli.Controllers
         // GET: JobApplication/Index
         public async Task<IActionResult> Index()
         {
-            // Retrieve all job applications
             var applications = await _applicationRepository.GetAllApplicationsAsync();
             return View(applications);
         }
@@ -81,8 +78,6 @@ namespace webjooneli.Controllers
                 return NotFound();
             }
 
-            // Fetch the associated job opening (if needed)
-            //application.JobOpening = await _applicationRepository.GetJobOpeningByApplicationIdAsync(id);
             return View(application);
         }
 

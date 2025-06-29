@@ -9,7 +9,8 @@ namespace webjooneli.Controllers
     {
         private readonly IJobOpeningRepository _jobOpeningRepository;
         private readonly ILogger<JobOpeningController> _logger;
-        public JobOpeningController(IJobOpeningRepository jobOpeningRepository, ILogger<JobOpeningController> logger)
+        public JobOpeningController(IJobOpeningRepository jobOpeningRepository, 
+            ILogger<JobOpeningController> logger)
         {
             _jobOpeningRepository = jobOpeningRepository;
             _logger = logger;
@@ -22,13 +23,14 @@ namespace webjooneli.Controllers
             var jobOpenings = await _jobOpeningRepository.GetAllJobOpeningsAsync();
             return View(jobOpenings);
         }
+
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
+
         [Authorize(Roles = "Admin")]
-        // Create new job opening
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(JobOpeningModel jobOpening)
@@ -40,8 +42,8 @@ namespace webjooneli.Controllers
             }
             return View(jobOpening);
         }
+
         [Authorize(Roles = "Admin")]
-        // Edit existing job opening
         public async Task<IActionResult> Edit(string id)
         {
             var jobOpening = await _jobOpeningRepository.GetJobOpeningByIdAsync(id);
@@ -51,6 +53,7 @@ namespace webjooneli.Controllers
             }
             return View(jobOpening);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,8 +71,8 @@ namespace webjooneli.Controllers
             }
             return View(jobOpening);
         }
+
         [Authorize(Roles = "Admin")]
-        // Delete job opening
         public async Task<IActionResult> Delete(string id)
         {
             await _jobOpeningRepository.DeleteJobOpeningAsync(id);

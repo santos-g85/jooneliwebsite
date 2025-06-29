@@ -24,10 +24,7 @@ namespace webjooneli.Models.Entities
         [BsonElement("CVFileId")]
         public string CVFileId { get; set; }
 
-        [BsonElement("CVFileMetadata")]
-        public string CVFileMetadata { get; set; }
-
-
+     
         [BsonElement("CreatedAt")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

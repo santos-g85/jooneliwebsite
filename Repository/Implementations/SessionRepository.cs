@@ -10,7 +10,8 @@ namespace webjooneli.Repository.Implementations
         private readonly ILogger<SessionRepository> _logger;
         private readonly IMongoCollection<UserSessionsModel> _sessionCollection;
 
-        public SessionRepository(ILogger<SessionRepository> logger, MongoDbContext dbContext)
+        public SessionRepository(ILogger<SessionRepository> logger, 
+            MongoDbContext dbContext)
         {
             _logger = logger;
             var collectionName = nameof(UserSessionsModel).Replace("Model", "");

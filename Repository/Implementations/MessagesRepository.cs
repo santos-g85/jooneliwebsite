@@ -10,7 +10,8 @@ namespace webjooneli.Repository.Implementations
         private readonly ILogger<MessagesRepository> _logger;
         private readonly IMongoCollection<MessagesModel> _messagescollection;
 
-        public MessagesRepository(MongoDbContext mongoDbContext, ILogger<MessagesRepository> logger)
+        public MessagesRepository(MongoDbContext mongoDbContext, 
+            ILogger<MessagesRepository> logger)
         {
             var collectionName = nameof(MessagesModel).Replace("Model", "");
             _messagescollection = mongoDbContext.GetCollection<MessagesModel>(collectionName);

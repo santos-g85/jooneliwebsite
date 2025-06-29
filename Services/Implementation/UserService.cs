@@ -6,7 +6,8 @@ public class UserService
 
     private readonly IMongoCollection<Users> _collection;
     private readonly ILogger<UserService> _logger;
-    public UserService(ILogger<UserService> logger, MongoDbContext dbContext)
+    public UserService(ILogger<UserService> logger,
+        MongoDbContext dbContext)
     {
         var collectionName = nameof(Users).Replace("model", "");
         _collection = dbContext.GetCollection<Users>(collectionName);

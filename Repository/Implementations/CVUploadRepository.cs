@@ -13,7 +13,8 @@ namespace webjooneli.Repository.Implementations
         private readonly IMongoCollection<CVUploadModel> _cvCollection;
         private readonly ILogger<CVUploadRepository> _logger;
         private readonly GridFSBucket _gridFS;
-        public CVUploadRepository(MongoDbContext mongoDbContext, ILogger<CVUploadRepository> logger)
+        public CVUploadRepository(MongoDbContext mongoDbContext, 
+            ILogger<CVUploadRepository> logger)
         {
             var collectionName = nameof(CVUploadModel).Replace("Model", "");
             _cvCollection = mongoDbContext.GetCollection<CVUploadModel>(collectionName);
@@ -21,45 +22,25 @@ namespace webjooneli.Repository.Implementations
             _gridFS = mongoDbContext.GridFsBucket;
         }
 
-        // Method to get a CV by its ID
+       
         public async Task<CVUploadModel> GetCVByIdAsync(string id)
         {
             var filter = Builders<CVUploadModel>.Filter.Eq(cv => cv.Id, id);
             return await _cvCollection.Find(filter).FirstOrDefaultAsync();
         }
 
-        // Method to create a new CV record
-        //public async Task CreateCVAsync(CVUploadModel cvUpload)
-        //{
-        //    await _cvCollection.InsertOneAsync(cvUpload);
-        //    _logger.LogInformation("CV uploaded successfully: {FullName}, FileId: {FileId}", cvUpload.Name, cvUpload.CVFileId);
-        //}
-        public async Task<string> CreateCVAsync(CVUploadModel cvUpload, IFormFile cvFile)
+      
+        public async Task CreateCVAsync(CVUploadModel cvUpload)
         {
-            if (cvFile == null || cvFile.Length == 0)
-                throw new ArgumentException("Invalid CV file.");
+            try
+            {
+                await _cvCollection.InsertOneAsync(cvUpload);
+                _logger.LogInformation("successfully inserted cvfile!");
 
-            // Upload file to GridFS
-            var fileId = await _gridFS.UploadFromStreamAsync(
-                cvFile.FileName,
-                cvFile.OpenReadStream(),
-                new GridFSUploadOptions
-                {
-                    Metadata = new MongoDB.Bson.BsonDocument
-                    {
-                            { "Name", cvUpload.Name },
-                            { "Email", cvUpload.Email },
-                            { "ContactNumber", cvUpload.ContactNumber },
-                            { "UploadedAt", cvUpload.CreatedAt }
-                    }
-                });
-
-            cvUpload.CVFileId = fileId.ToString();
-            await _cvCollection.InsertOneAsync(cvUpload);
-
-            _logger.LogInformation("CV uploaded successfully. Name: {Name}, FileId: {FileId}", cvUpload.Name, cvUpload.CVFileId);
-
-            return cvUpload.CVFileId;
+            }catch(Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+            }
         }
 
         // Method to delete a CV by its ID

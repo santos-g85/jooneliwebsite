@@ -4,5 +4,6 @@
     {
         Task<string> UploadImageAsync(IFormFile imageFile);
         //Task<byte[]> DownloadImageAsync(string fileId);
+        bool DeleteImage(string imagePath);
     }
 }

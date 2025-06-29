@@ -1,51 +1,99 @@
 ﻿@model webjooneli.Models.Entities.NewsModel
+@using webjooneli.Models.Enums
 
 @{
     ViewBag.Title = "Create News";
-    Layout = "_AdminLayout"; 
+    Layout = "_AdminLayout";
 }
 
-<h2>Create News</h2>
-
-<form asp-action="Create" asp-controller="News" method="post" enctype="multipart/form-data">
-  
-    @* Validation summary *@
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-    <!-- Title -->
-    <div class="mb-3">
-        <label asp-for="Title" class="form-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3 class="card-title">Create New News Article</h3>
     </div>
+    <div class="card-body">
+        <form asp-action="Create" method="post" enctype="multipart/form-data" id="createNewsForm">
+            @Html.AntiForgeryToken()
 
-    <!-- Content -->
-    <div class="mb-3">
-        <label asp-for="Content" class="form-label"></label>
-        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Content" class="text-danger"></span>
-    </div>
+            <div asp-validation-summary="All" class="alert alert-danger"></div>
 
-    <!-- Category -->
-    <div class="mb-3">
-        <label asp-for="Category" class="form-label"></label>
-        <input asp-for="Category" class="form-control" />
-        <span asp-validation-for="Category" class="text-danger"></span>
-    </div>
+            <div class="form-group mb-4">
+                <label asp-for="Title" class="form-label fw-bold"></label>
+                <input asp-for="Title" class="form-control form-control-lg" placeholder="Enter news title" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
 
-     <!-- Image Upload -->
-    <div class="mb-3">
-        <label class="form-label">Upload Image</label>
-        <input type="file" name="imageFile" class="form-control" />
-    </div>
- 
-    <!-- Is Featured -->
-    <div class="mb-3 form-check">
-        <input asp-for="IsFeatured" class="form-check-input" type="checkbox" />
-        <label asp-for="IsFeatured" class="form-check-label"></label>
-    </div>
+            <div class="form-group mb-4">
+                <label asp-for="Content" class="form-label fw-bold"></label>
+                <textarea asp-for="Content" class="form-control" rows="8" placeholder="Enter news content"></textarea>
+                <span asp-validation-for="Content" class="text-danger small"></span>
+            </div>
 
-    <!-- Submit -->
-    <button asp-controller="News" asp-action="Create" type="submit" class="btn btn-success">Create News</button>
-    <a asp-action="Index" asp-controller="News" class="btn btn-secondary">Cancel</a>
-</form>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Category" class="form-label fw-bold"></label>
+                        <select asp-for="Category" asp-items="Html.GetEnumSelectList<NewsCategory>()"
+                                class="form-select">
+                            <option value="">-- Select Category --</option>
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label fw-bold">News Image</label>
+                        <div class="input-group">
+                            <input type="file" name="imageFile" class="form-control" accept="image/*" id="newsImage">
+                        </div>
+                        <small class="text-muted">Maximum size: 5MB. Allowed formats: JPG, PNG, WEBP</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group form-switch mb-4">
+                <input class="form-check-input" type="checkbox" role="switch" asp-for="IsFeatured">
+                <label class="form-check-label fw-bold" asp-for="IsFeatured">Feature this news</label>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary px-4 py-2">
+                    <i class="fas fa-save me-2"></i>Create News
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary px-4 py-2 ms-2">
+                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Update file input label
+        document.getElementById('newsImage').addEventListener('change', function(e) {
+            var fileName = e.target.files[0]?.name || 'Choose file...';
+            var label = e.target.nextElementSibling;
+            if (label) {
+                label.innerText = fileName;
+            }
+        });
+
+        // Initialize rich text editor (optional)
+        $(document).ready(function() {
+            $('#Content').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ],
+                placeholder: 'Write your news content here...'
+            });
+        });
+    </script>
+}

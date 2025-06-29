@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace webjooneli.Controllers
 {
-    public class BusinessController : Controller
+    public class SolutionsController : Controller
     {
         public IActionResult Index()
         {
@@ -21,7 +21,6 @@ namespace webjooneli.Controllers
 
         private BusinessModel? GetBusinessById(string id)
         {
-            // In real app, fetch from DB. Hardcoded for now:  
             var businesses = new List<BusinessModel>
            {
                new BusinessModel
@@ -35,7 +34,7 @@ namespace webjooneli.Controllers
                new BusinessModel
                {
                    Id = "trading",
-                   Title = "Trading System",
+                   Title = "Jooneli Trading",
                    Description = "High-performance online trading system with real-time analytics and multi-device access.",
                    Icon = "bi-graph-up-arrow",
                    Svg = "bi bi-bar-chart-line"

@@ -19,7 +19,7 @@
 
             <!-- Solutions Dropdown -->
             <li class="nav-item dropdown solutions-dropdown">
-                <a class="nav-link fs-6" asp-controller="Business" asp-action="Index">
+                <a class="nav-link fs-6" asp-controller="Solutions" asp-action="Index">
                     SOLUTIONS
                 </a>
             </li>
@@ -29,12 +29,19 @@
                     CAREER
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link fs-6 " asp-controller="News" asp-action="Index">
+                    NEWS
+                </a>
+            </li>
+
         </ul>
     </div>
 
     <!-- Get in Touch Button -->
     <div class="d-none d-lg-block">
-        <a class="btn btn-outline-danger px-4 py-2 fw-medium" asp-controller="Message" asp-action="Create">
+        <a class="btn btn-outline-danger px-4 py-2 fw-medium" asp-controller="Message" asp-action="Index">
             Get in Touch
         </a>
     </div>

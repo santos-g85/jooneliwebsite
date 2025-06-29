@@ -10,7 +10,8 @@ namespace webjooneli.Repository.Implementations
         private readonly ILogger<JobOpeningRepository> _logger;
         private readonly IMongoCollection<JobOpeningModel> _jobOpeningsCollection;
 
-        public JobOpeningRepository(MongoDbContext mongoDbContext, ILogger<JobOpeningRepository> logger)
+        public JobOpeningRepository(MongoDbContext mongoDbContext, 
+            ILogger<JobOpeningRepository> logger)
         {
             var collectionName = nameof(JobOpeningModel).Replace("Model", "");
             _jobOpeningsCollection = mongoDbContext.GetCollection<JobOpeningModel>(collectionName);

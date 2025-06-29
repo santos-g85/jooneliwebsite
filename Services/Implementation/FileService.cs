@@ -1,130 +1,197 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver.GridFS;
-using webjooneli.Services.Interfaces;
-using webjooneli.Settings;
-using Microsoft.Extensions.Logging;
+﻿using System.IO;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using MongoDB.Driver;
+using Microsoft.Extensions.Logging;
+using webjooneli.Services.Interfaces;
 
-namespace webjooneli.Services.Implementation
+public class FileService : IFileService
 {
-    public class FileService : IFileService
+    private readonly ILogger<FileService> _logger;
+    private const string UploadsFolder = "uploads/files";
+    public const long MaxFileSizeBytes = 20 * 1024 * 1024; 
+
+    // Allowed MIME types and extensions
+    private readonly Dictionary<string, string[]> _allowedFileTypes = new()
     {
-        private readonly MongoDbContext _mongoDbContext;
-        private readonly ILogger<FileService> _logger;
+        ["Documents"] = new[] { ".pdf", ".doc", ".docx", ".txt", ".rtf" },
+        ["Spreadsheets"] = new[] { ".xls", ".xlsx", ".csv" },
+        ["Presentations"] = new[] { ".ppt", ".pptx" },
+        ["Text"] = new[] { ".txt", ".log", ".md" }
+    };
 
-        public FileService(MongoDbContext mongoDbContext, ILogger<FileService> logger)
+    public FileService(ILogger<FileService> logger)
+    {
+        _logger = logger;
+    }
+
+    public async Task<FileUploadResult> UploadFileAsync(IFormFile file)
+    {
+        try
         {
-            _mongoDbContext = mongoDbContext;
-            _logger = logger;
+            if (!IsFileValid(file))
+            {
+                return new FileUploadResult(
+                    false,
+                    null,
+                    null,
+                    null,
+                    0,
+                    "Invalid file type or size"
+                );
+            }
+
+            // Create directory if it doesn't exist
+            var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", UploadsFolder);
+            Directory.CreateDirectory(uploadsPath);
+
+            // Get file extension and generate safe filename
+            var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var fileName = $"{Guid.NewGuid()}{fileExtension}";
+            var relativePath = Path.Combine(UploadsFolder, fileName);
+            var fullPath = Path.Combine(uploadsPath, fileName);
+
+            // Save the file
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return new FileUploadResult(
+                true,
+                relativePath.Replace("\\", "/"),
+                file.FileName,
+                file.ContentType,
+                file.Length
+            );
         }
-
-        // Method to upload a file to GridFS
-        public async Task<string> UploadFileAsync(IFormFile file, string userName)
+        catch (Exception ex)
         {
-            if (file == null || file.Length == 0)
-                throw new ArgumentException("No file selected for upload");
-
-            try
-            {
-                using (var stream = file.OpenReadStream())
-                {
-                    // Metadata to be associated with the file
-                    var metadata = new BsonDocument
-                    {
-                        { "UserName", userName },
-                        { "UploadedAt", DateTime.UtcNow }
-                    };
-
-                    // Upload the file to GridFS and get the file ID
-                    var fileId = await _mongoDbContext.GridFsBucket.UploadFromStreamAsync(file.FileName, stream, new GridFSUploadOptions
-                    {
-                        Metadata = metadata
-                    });
-
-                    _logger.LogInformation("File uploaded successfully: {FileName} with FileId: {FileId}", file.FileName, fileId.ToString());
-
-                    return fileId.ToString(); // Return the file ID as a string
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error uploading file: {Error}", ex.Message);
-                throw new Exception("Error uploading file to server", ex);
-            }
-        }
-
-        // Method to download a file from GridFS
-        public async Task<byte[]> DownloadFileAsync(string fileId)
-        {
-            if (string.IsNullOrEmpty(fileId))
-                throw new ArgumentException("Invalid file ID");
-
-            try
-            {
-                var objectId = new ObjectId(fileId); // Convert the string fileId to ObjectId
-
-                // Download the file's data from GridFS
-                using (var stream = await _mongoDbContext.GridFsBucket.OpenDownloadStreamAsync(objectId))
-                {
-                    var fileBytes = new byte[stream.Length];
-                    await stream.ReadAsync(fileBytes, 0, (int)stream.Length);
-                    return fileBytes;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error downloading file: {Error}", ex.Message);
-                throw new Exception("Error downloading file from server", ex);
-            }
-        }
-
-        // Method to get metadata of a file from GridFS
-        public async Task<BsonDocument> GetFileMetadataAsync(string fileId)
-        {
-            if (string.IsNullOrEmpty(fileId))
-                throw new ArgumentException("Invalid file ID");
-
-            try
-            {
-                var objectId = new ObjectId(fileId); // Convert the string fileId to ObjectId
-
-                // Fetch file metadata from GridFS
-                var fileInfo = await _mongoDbContext.GridFsBucket.FindAsync(Builders<GridFSFileInfo>.Filter.Eq(f => f.Id, objectId));
-                var file = await fileInfo.FirstOrDefaultAsync();
-
-                return file?.Metadata ?? null;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error fetching file metadata: {Error}", ex.Message);
-                throw new Exception("Error fetching file metadata from server", ex);
-            }
-        }
-
-        // Method to delete a file from GridFS
-        public async Task DeleteFileAsync(string fileId)
-        {
-            if (string.IsNullOrEmpty(fileId))
-                throw new ArgumentException("Invalid file ID");
-
-            try
-            {
-                var objectId = new ObjectId(fileId); // Convert the string fileId to ObjectId
-
-                // Delete the file from GridFS
-                await _mongoDbContext.GridFsBucket.DeleteAsync(objectId);
-
-                _logger.LogInformation("File deleted successfully with FileId: {FileId}", fileId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error deleting file: {Error}", ex.Message);
-                throw new Exception("Error deleting file from server", ex);
-            }
+            _logger.LogError(ex, "Error uploading file");
+            return new FileUploadResult(
+                false,
+                null,
+                null,
+                null,
+                0,
+                ex.Message
+            );
         }
     }
+
+    public bool DeleteFile(string filePath)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(filePath)) return false;
+
+            var fullPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                filePath.TrimStart('/')
+            );
+
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+                return true;
+            }
+            return false;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting file");
+            return false;
+        }
+    }
+
+    public bool IsFileValid(IFormFile file)
+    {
+        if (file == null || file.Length == 0 || file.Length > MaxFileSizeBytes)
+            return false;
+
+        var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+        // Check if extension is in any of the allowed categories
+        return _allowedFileTypes.Values
+            .Any(extensions => extensions.Contains(fileExtension));
+    }
+
+    public async Task<FileDownloadResult> DownloadFileAsync(string filePath)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return new FileDownloadResult(
+                    false,
+                    null,
+                    null,
+                    null,
+                    "File path is empty"
+                );
+            }
+
+            var fullPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                filePath.TrimStart('/')
+            );
+
+            if (!File.Exists(fullPath))
+            {
+                return new FileDownloadResult(
+                    false,
+                    null,
+                    null,
+                    null,
+                    "File not found"
+                );
+            }
+
+            var fileBytes = await File.ReadAllBytesAsync(fullPath);
+            var contentType = GetContentType(fullPath);
+            var fileName = Path.GetFileName(fullPath);
+
+            return new FileDownloadResult(
+                true,
+                fileBytes,
+                contentType,
+                fileName
+            );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error downloading file");
+            return new FileDownloadResult(
+                false,
+                null,
+                null,
+                null,
+                ex.Message
+            );
+        }
+    }
+
+    private string GetContentType(string path)
+    {
+        var extension = Path.GetExtension(path).ToLowerInvariant();
+
+        return extension switch
+        {
+            ".pdf" => "application/pdf",
+            ".doc" => "application/msword",
+            ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            ".xls" => "application/vnd.ms-excel",
+            ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ".txt" => "text/plain",
+            ".csv" => "text/csv",
+            ".ppt" => "application/vnd.ms-powerpoint",
+            ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            _ => "application/octet-stream" // Default for unknown types
+        };
+    }
+    public IEnumerable<string> GetAllowedExtensions()
+    {
+        return _allowedFileTypes.Values.SelectMany(x => x).Distinct();
+    }
+
 }
