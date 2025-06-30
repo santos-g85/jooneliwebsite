@@ -71,3 +71,14 @@
 .navbar-container.animate-bg .navbar-toggler-icon-custom {
     color: #1f2937 !important;
 }
+
+
+/*for logo toggle*/
+.navbar-logo {
+    filter: brightness(0) invert(1); /* Makes logo white */
+    transition: filter 0.3s ease;
+}
+
+.navbar-container.animate-bg .navbar-logo {
+    filter: none; /* Returns to original (red) color */
+}
