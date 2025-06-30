@@ -113,6 +113,7 @@ namespace webjooneli.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DownloadCVFile([FromQuery] string filePath)
         {
             var result = await _fileService.DownloadFileAsync(filePath);
@@ -129,6 +130,7 @@ namespace webjooneli.Controllers
             );
         }
 
+        [Authorize(Roles = "Admin")]
         public bool DeleteCvFile(string cvFilePath)
         {
             _logger.LogInformation("Deleting CV file with path {FilePath}", cvFilePath);
@@ -146,7 +148,7 @@ namespace webjooneli.Controllers
             }
         }
 
-        
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCV(string Id)
         {
             _logger.LogWarning("Attempting to delete CV!");

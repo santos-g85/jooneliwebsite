@@ -23,15 +23,12 @@ namespace webjooneli.Controllers
             return View(news);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        
+        [ResponseCache(Duration = 432000, Location = ResponseCacheLocation.Any, NoStore = false)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

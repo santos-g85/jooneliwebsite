@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
+[Route("hidden1-login1")]
 public class LoginController : Controller
 {
     private readonly UserService _userService;

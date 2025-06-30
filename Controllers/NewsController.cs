@@ -31,6 +31,7 @@ namespace webjooneli.Controllers
             return View(news);
         }
 
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AdminIndex()
         {
@@ -40,7 +41,7 @@ namespace webjooneli.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        [Unauthenticated404]
         // GET: /News/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -69,18 +70,7 @@ namespace webjooneli.Controllers
         }
 
 
-
-        public async Task<IActionResult> NewsDetails()
-        {
-            var news = await _newsRepository.GetNewsByDateAsync();
-            if (news == null)
-                return NotFound();
-
-            return View(news);
-        }
-
-       
-        [Authorize(Roles = "Admin")]
+        [Unauthenticated404]
         // GET: /News/Create
         public IActionResult Create()
         {
@@ -90,7 +80,7 @@ namespace webjooneli.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "admin")]
         [RequestSizeLimit(5 * 1024 * 1024)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewsModel news,
@@ -130,8 +120,7 @@ namespace webjooneli.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
-        // GET: /News/Edit/5
+        [Unauthenticated404]
         public async Task<IActionResult> Edit(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -163,34 +152,10 @@ namespace webjooneli.Controllers
         }
 
 
-        /*[Authorize(Roles = "Admin")]
-        // POST: /News/Edit/5
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, NewsModel news)
-        {
-            if (id != news.Id)
-                return BadRequest();
-
-            if (!ModelState.IsValid)
-                return View(news);
-
-            var result = await _newsRepository.GetNewsByIdAsync(id);
-            if(result!=null)
-            {
-                DeleteImage(result.ImageId);
-            }
-            
-            await _newsRepository.UpdateNewsAsync(id, news);
-
-            return RedirectToAction(nameof(Index));
-        }*/
-
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, NewsModel news, IFormFile newImageFile)
+        public async Task<IActionResult> Edit(string id, NewsModel news, IFormFile? newImageFile)
         {
             try
             {
@@ -211,7 +176,7 @@ namespace webjooneli.Controllers
                 {
                     _logger.LogWarning("News not found for ID: {Id}", id);
                     TempData["ErrorMessage"] = "News not found";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(AdminIndex));
                 }
 
                 // Handle image update if new file was provided
@@ -246,7 +211,7 @@ namespace webjooneli.Controllers
 
                 await _newsRepository.UpdateNewsAsync(id, news);
                 TempData["SuccessMessage"] = "News updated successfully";
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminIndex));
             }
             catch (Exception ex)
             {
@@ -258,7 +223,7 @@ namespace webjooneli.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        [Unauthenticated404]
         // GET: /News/Delete/5
         public async Task<IActionResult> Delete(string id)
         {

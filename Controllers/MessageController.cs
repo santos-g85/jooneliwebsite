@@ -16,7 +16,7 @@ namespace webjooneli.Controllers
             _logger = logger;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Unauthenticated404]
         // GET: MessageController
         public async Task<IActionResult> AdminIndex()
         {
@@ -35,7 +35,7 @@ namespace webjooneli.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Unauthenticated404]
         // GET: MessageController/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -46,7 +46,7 @@ namespace webjooneli.Controllers
                 {
                     TempData["Error"] = "Message not found.";
                     _logger.LogWarning("message not found");
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(AdminIndex));
                 }
 
                 return View(message);
@@ -90,7 +90,7 @@ namespace webjooneli.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Unauthenticated404]
         // GET: MessageController/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
@@ -101,7 +101,7 @@ namespace webjooneli.Controllers
                 {
                     TempData["Error"] = "Message not found.";
                     _logger.LogWarning("Message not found.");
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(AdminIndex));
                 }
 
                 return View(message);
@@ -124,7 +124,7 @@ namespace webjooneli.Controllers
             {
                 await _messagesRepository.DeleteMessagesAsync(id);
                 _logger.LogInformation("Message delted");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminIndex));
             }
             catch (Exception ex)
             {

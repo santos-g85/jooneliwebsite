@@ -49,9 +49,9 @@ builder.Services.AddScoped<ICVUploadRepository, CVUploadRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Login";
-        options.LogoutPath = "/Login/Logout";
-        options.AccessDeniedPath = "/Login/AccessDenied";
+        options.LoginPath = "/hidden1-login1";
+        options.LogoutPath = "/hidden1-login1/Logout";
+        options.AccessDeniedPath = "/hidden1-login1/AccessDenied";
     });
 
 builder.Services.AddAuthorization();
