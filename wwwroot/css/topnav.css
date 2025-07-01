@@ -35,11 +35,11 @@
     pointer-events: none;
 }
 
-    .mega-dropdown-container.show {
+ .mega-dropdown-container.show {
         max-height: 400px; /* Adjust based on your content */
         opacity: 1;
         pointer-events: auto;
-    }
+ }
 
 .mega-dropdown {
     padding: 2rem 0;
@@ -75,10 +75,10 @@
 
 /*for logo toggle*/
 .navbar-logo {
-    filter: brightness(0) invert(1); /* Makes logo white */
+    filter: brightness(0) invert(1); 
     transition: filter 0.3s ease;
 }
 
 .navbar-container.animate-bg .navbar-logo {
-    filter: none; /* Returns to original (red) color */
+    filter: none; 
 }

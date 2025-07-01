@@ -1,9 +1,9 @@
 ﻿@using webjooneli.Models.Entities
 @model MessagesModel;
 
+<div class="container-fluid ms-5">
 <div class="cpy-7 mt-md-5 mt-0">
     <div class="row  align-items-center gx-5">
-        @* <h3 class="text-danger">Send Us a Message</h3> *@
         <h3 style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
             Send Us a Message
         </h3>
@@ -11,7 +11,6 @@
         <div class="col-md-6 order-2 order-md-1">
             <form asp-controller="Message" asp-action="Index" method="post" id="contactForm">
 
-                @* Display validation errors *@
                 <div asp-validation-summary="All" class="text-danger"></div>
 
                 <!-- Full Name -->
@@ -43,29 +42,11 @@
             </form>
 
         </div>
-
-        @* <!-- Image Section --> 
-        <div class="col-md-6 text-center pe-md-3 mt-4 mt-md-0 order-1 order-md-2"> 
-            <div class="bg-image" style="background-image: url('/wwwroot/images/handshake.jpg'); background-size: cover; background-position: center center;height:300px;width:300px;"> 
-            </div> 
-        </div> 
-
-
-        <!-- Google Map Section -->
-        <div class="row mt-5">  
-            <div class="col-6>  
-              <h3 class="text-center mb-4">Our Location</h3>  
-                <div class="map-responsive">  
-                    <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>  
-               </div>  
-            </div>  
-        </div>  
- *@
     </div>
 </div>
-
+</div>
 <!-- Contact Information Section -->
-<div class="row mt-5">
+<div class="row mt-5 ms-5">
     <div class="col-md-6">
         <h3 class="text-danger">Get In Touch</h3>
         <ul class="list-unstyled">

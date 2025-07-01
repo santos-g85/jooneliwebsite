@@ -60,6 +60,7 @@
             </div>
         }
 
+
         <!-- Main Content -->
         <div class="row g-4">
             <!-- News Grid -->
@@ -108,81 +109,23 @@
                     }
                 </div>
 
-                <!-- Pagination -->
-                @* <nav aria-label="News pagination" class="mt-5">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link text-black" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link text-black" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav> *@
             </div>
 
             <!-- Sidebar -->
             <div class="col-lg-4">
                 <div class="sticky-top" style="top: 20px;">
-                    <!-- Categories -->
-                    @*   <div class="card mb-4 border-0 shadow-sm">
-                        <div class="card-body">
-                            <h3 class="h5 card-title mb-3">Categories</h3>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                    <a href="#" class="text-decoration-none">Company News</a>
-                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category == 1)</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                    <a href="#" class="text-decoration-none">Product Updates</a>
-                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category == "Product Updates")</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                    <a href="#" class="text-decoration-none">Industry Insights</a>
-                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category == "Industry Insights")</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                    <a href="#" class="text-decoration-none">Events</a>
-                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category == "Events")</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> *@
+                    @{
+                        if(Model.Count(x => x.Category.ToString() == "Blogs") > 0)
+                        {
+                            @await Html.PartialAsync("_BlogSidebar.cshtml", Model)
+                        }   
+                   }
+                    
+                    <!--categories-->
+                    @* @await Html.PartialAsync("_NewsCategories.cshtml", Model) *@
 
-                    <!-- Recent News -->
-                    <div class="card bg-secondary-subtle mb-4 border-0 shadow-sm">
-                        <div class="card-body">
-                            <h3 class="h5 card-title mb-3">Recent Posts</h3>
-                            <div class="list-group list-group-flush">
-                                @foreach (var item in Model.OrderByDescending(n => n.CreatedAt).Take(3))
-                                {
-                                    <a href="@Url.Action("NewsDetail", "News", new { id = item.Id })" class="list-group-item list-group-item-action border-0 px-0">
-                                        <div class="d-flex align-items-center rounded-2">
-                                            <div class="flex-shrink-0 ratio ratio-1x1 bg-light" style="width: 60px;">
-                                                @if (!string.IsNullOrEmpty(item.ImageId))
-                                                {
-                                                    <img src="/@item.ImageId " class="object-fit-cover rounded" alt="@item.Title">
-                                                }
-                                                else
-                                                {
-                                                    <div class="d-flex align-items-center justify-content-center text-muted">
-                                                        <i class="bi bi-newspaper"></i>
-                                                    </div>
-                                                }
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h4 class="h6 mb-1">@item.Title</h4>
-                                                <small class="text-muted">@item.CreatedAt.ToString("MMM dd")</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                }
-                            </div>
-                        </div>
-                    </div>
+                    <!--Recent News-->
+                    @await Html.PartialAsync("_RecentNews.cshtml", Model)
 
                     <!-- Newsletter -->
                     @await Html.PartialAsync("_subscription")
@@ -190,24 +133,17 @@
                 </div>
             </div>
         </div>
+
+        <!--blogs-->
+        @await Html.PartialAsync("_Blogs.cshtml")
     </div>
 </div>
 
 <style>
-    /* Minimal custom CSS to enhance Bootstrap */
     .object-fit-cover {
         object-fit: cover;
     }
-    /*
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-            .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-            } */
-
+    
     .carousel-control-prev,
     .carousel-control-next {
         width: auto;
@@ -218,27 +154,3 @@
         background-size: 1rem;
     }
 </style>
-
-@*  <script>
-    // Initialize Bootstrap components
-    document.addEventListener('DOMContentLoaded', function() {
-        // Enable tooltips if needed
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-
-        // Add intersection observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
-        });
-    });
-</script> *@

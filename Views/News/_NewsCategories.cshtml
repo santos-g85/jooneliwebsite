@@ -1,0 +1,30 @@
+﻿@model List<webjooneli.Models.Entities.NewsModel>
+
+<!-- Categories -->
+   <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 card-title mb-3">Categories</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                    <a href="#" class="text-decoration-none">Company News</a>
+                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category.ToString() == "Comapany")</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                    <a href="#" class="text-decoration-none">Product Updates</a>
+                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category.ToString() == "Product")</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                    <a href="#" class="text-decoration-none">Industry Insights</a>
+                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category.ToString() == "Industry")</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                    <a href="#" class="text-decoration-none">Events</a>
+                                    <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category.ToString() == "Event")</span>
+                                </li>
+                                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                     <a href="#" class="text-decoration-none">Events</a>
+                                       <span class="badge bg-primary rounded-pill">@Model.Count(n => n.Category.ToString() == "Entertainment")</span>
+                                 </li>
+                            </ul>
+                        </div>
+   </div> 

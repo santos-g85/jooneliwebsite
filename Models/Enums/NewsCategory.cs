@@ -6,6 +6,7 @@
         Product,
         Industry,
         Event,
-        Entertainment
+        Entertainment,
+        Blogs
     }
 }

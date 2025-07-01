@@ -39,7 +39,7 @@
         </a>
     </div>
 
-    <!-- Mega Dropdown Container -->
+    @* <!-- Mega Dropdown Container -->
     <div class="mega-dropdown-container">
         <div class="mega-dropdown">
             <!-- Your mega dropdown content here -->
@@ -50,84 +50,79 @@
                         <ul class="list-unstyled">
                             <li class="text-decoration-none list-unstyled mb-4">
                                 <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                    @* <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">  *@
                                     <i class="bi bi-bank me-2"></i>
                                     <span class="me-3 text-black">360 CBS</span>
                                 </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
+                                <span class="ms-4">Comprehensive corporate banking solutions</span>
                             </li>
                             <li class="text-decoration-none list-unstyled mb-4">
                                 <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                     @* <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">  *@
                                     <i class="bi bi-phone me-2"></i>
                                     <span class="me-3 text-black">Mobile Banking</span>
                                 </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
+                                <span class="ms-4 ">>Banking on-the-go, anywhere, anytime</span>
                             </li>
                             <li class="text-decoration-none list-unstyled mb-4">
                                 <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                     @* <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">  *@
                                     <i class="bi bi-cash-coin me-2"></i>
                                     <span class="me-3 text-black">ATM Banking</span>
                                 </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
+                                <span class="ms-4 ">Access your funds securely with ATMs</span>
                             </li>
                             <li class="text-decoration-none list-unstyled ">
                                 <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                     @* <img src="/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">  *@
                                     <i class="bi bi-phone me-2"></i>
                                     <span class="me-3 text-black">Mobile Teller</span>
                                 </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
+                                <span class="ms-4 ">Instant teller access from your phone</span>
                             </li>
                         </ul>
                     </div>
-                    <!-- More columns as needed -->
+
+                    
                     <div class="col-md-4">
                         <h5>Trading System</h5>
                         <ul class="list-unstyled">
                             <li class="text-decoration-none list-unstyled mb-4">
                                 <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                     @* <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60"  class="me-2">  *@
                                     <i class="bi bi-cart-dash me-2"></i>
                                     <span class="me-3 text-black">Trading System</span>
                                 </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
+                                <span class="ms-4 ">Advanced trading system for efficient trading</span>
                             </li>
 
                             <li class="text-decoration-none list-unstyled">
                                 <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                     @* <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60" class="me-2">  *@
                                     <i class="bi bi-building me-2"></i>
                                     <span class="me-3 text-black ">ERP Mobile</span>
                                 </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
+                                <span class="ms-4 ">Mobile ERP for enterprise management</span>
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-md-4">
                         <h5>Automation</h5>
                         <ul class="list-unstyled">
                             <li class="text-decoration-none list-unstyled mb-4">
                                 <a href="http://multipledesk.com/" class="text-decoration-none d-flex align-items-center">
-                                    @* <img src="~/images/logohere.png" alt="Jooneli Logo" width="60"  class="me-2">  *@
                                     <i class="bi bi-plug me-2"></i>
                                     <span class="me-3 text-black">MultipleDesk - Remote Access</span>
                                 </a>
-                                <span class="ms-4 text-danger">Multiple Desk</span>
+                                <span class="ms-4 ">Remote access for seamless multitasking</span>
                             </li>
                             <li class="text-decoration-none list-unstyled">
                                 <a href="#" class="text-decoration-none d-flex align-items-center">
-                                     @* <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Logo" width="60" class="me-2">  *@
                                     <i class="bi bi-envelope me-2"></i>
                                     <span class="me-3 text-black">Email Automation</span>
                                 </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
+                                <span class="ms-4 ">Automate your email marketing and campaigns</span>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
+    @await Html.PartialAsync("Partials/_MegaDropdown.cshtml")
 </div>

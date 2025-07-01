@@ -21,42 +21,6 @@ body {
 
 
 
-/* Responsive Adjustments */
-/*@media (min-width: 376px) {
-    .navbar-container {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-}
-
-@media (min-width: 576px) {
-    .navbar-container {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-}
-
-@media (min-width: 992px) {
-    .navbar-container {
-        padding-left: 110px;
-        padding-right: 110px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .navbar-container {
-        padding-left: 120px;
-        padding-right: 120px;
-    }
-}
-
-@media (min-width: 1400px) {
-    .navbar-container {
-        padding-left: 120px;
-        padding-right: 120px;
-    }
-}*/
-
 /* Mobile Menu Styles */
 .offcanvas-header .logo-icon {
     width: 40px;
