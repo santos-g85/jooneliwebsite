@@ -13,13 +13,14 @@ public class LoginController : Controller
         _userService = userService;
     }
 
-    [HttpGet]
+    [HttpGet("")]
     public IActionResult Index()
     {
         return View("/Views/Login/Login.cshtml");
     }
 
-    [HttpPost]
+
+    [HttpPost("")]
     public async Task<IActionResult> Index(string username, string password)
     {
         var user = _userService.Authenticate(username, password);
@@ -43,12 +44,24 @@ public class LoginController : Controller
         return RedirectToAction("Index", "Admin");
     }
 
+    /*    public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index");
+        }*/
+
+
+    [HttpGet("Logout")]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        Response.Cookies.Delete(".AspNetCore.Cookies");
+
         return RedirectToAction("Index");
     }
 
+    [HttpGet("AccessDenied")]
     public IActionResult AccessDenied()
     {
         return View();

@@ -57,7 +57,8 @@ namespace webjooneli.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, JobOpeningModel jobOpening)
+        public async Task<IActionResult> Edit(string id, 
+            JobOpeningModel jobOpening)
         {
             if (id != jobOpening.Id)
             {

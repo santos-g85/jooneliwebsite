@@ -72,7 +72,8 @@ namespace webjooneli.Controllers
         [HttpPost]
         [AllowAnonymous]
         [RequestSizeLimit(20*1024*1024)]
-        public async Task<IActionResult> CVUploads(string Name, string Email, string ContactNumber, IFormFile CVFile)
+        public async Task<IActionResult> CVUploads(string Name, 
+            string Email, string ContactNumber, IFormFile CVFile)
         {
            _logger.LogInformation($"CV info received with file:{CVFile}!");
 
@@ -130,6 +131,7 @@ namespace webjooneli.Controllers
             );
         }
 
+
         [Authorize(Roles = "Admin")]
         public bool DeleteCvFile(string cvFilePath)
         {
@@ -147,6 +149,7 @@ namespace webjooneli.Controllers
                 return false;
             }
         }
+
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCV(string Id)

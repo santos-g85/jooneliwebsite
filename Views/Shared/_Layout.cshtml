@@ -10,7 +10,7 @@
     <title>@ViewData["Title"]Jooneli Inc</title>
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-     <link rel="stylesheet" href="~/css/topnav.css" asp-append-version="true" /> 
+    <link rel="stylesheet" href="~/css/topnav.css" asp-append-version="true" /> 
     <link rel="stylesheet" href="~/css/video.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/touch-button.css" asp-append-version="true" />
 
@@ -46,8 +46,8 @@
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-     @RenderSection("Styles", required: false)
-    
+    @RenderSection("Styles", required: false)
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J3CMH0V42N"></script>
     <script>
@@ -60,13 +60,14 @@
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif;
         }
     </style>
 </head>
 <body>
 
-    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Home"
+    && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
     {
         <div class="video-header position-relative">
 
@@ -75,24 +76,20 @@
                 Your browser does not support the video tag.
             </video>
 
-        <section >
-            <!-- Navbar Container with Animation Background -->
-            <div class="navbar-container position-relative">
-                <div class="navbar-bg-overlay"></div>
-
-                <nav class="navbar navbar-expand-lg  position-relative">
-                    @await Html.PartialAsync("_Navbar.cshtml")
-                </nav>
-            </div>
-             @await Html.PartialAsync("Partials/_HomeHeroContent") 
-        </section>
+            <section >
+                <div class="navbar-container position-relative">
+                    <div class="navbar-bg-overlay"></div>
+                    <nav class="navbar navbar-expand-lg  position-relative">
+                        @await Html.PartialAsync("_Navbar.cshtml")
+                    </nav>
+                </div>
+                @await Html.PartialAsync("Partials/_HomeHeroContent") 
+            </section>
         </div>
     }
     else
     {
         <section>
-
-            <!-- Navbar Container with Animation Background -->
             <div class="navbar-container position-relative">
                 <div class="navbar-bg-overlay"></div>
 
@@ -103,6 +100,17 @@
         </section>
     }
 
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "About" 
+    && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+    {
+        @await Html.PartialAsync("~/Views/About/_AboutBanner.cshtml")
+    }
+
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Solutions"
+    && ViewContext.RouteData.Values["action"]?.ToString()== "Index")
+    {
+        @await Html.PartialAsync("~/Views/Solutions/_SolutionsBanner.cshtml")
+    }
 
     @await Html.PartialAsync("Partials/_MobileOffcanvas")
 

@@ -11,7 +11,8 @@ namespace webjooneli.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly INewsRepository _newsRepository;
-        public HomeController(ILogger<HomeController> logger,INewsRepository newsRepository)
+        public HomeController(ILogger<HomeController> logger,
+            INewsRepository newsRepository)
         {
             _logger = logger;
             _newsRepository = newsRepository;
@@ -24,7 +25,9 @@ namespace webjooneli.Controllers
         }
 
         
-        [ResponseCache(Duration = 432000, Location = ResponseCacheLocation.Any, NoStore = false)]
+        [ResponseCache(Duration = 432000, 
+            Location = ResponseCacheLocation.Any, 
+            NoStore = false)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
