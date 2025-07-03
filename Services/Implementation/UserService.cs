@@ -24,7 +24,7 @@ public class UserService
                 _collection.InsertOne(new Users
                 {
                     UserName = "admin",
-                    PasswordHash = "admin123",
+                    PasswordHash = "@admin123#",
                     Role = "Admin"
                 });
                 _logger.LogInformation("Admin user seeded");
@@ -38,11 +38,11 @@ public class UserService
 
     public Users? Authenticate(string username, string password)
     {
-        if(username == "superadmin" && password == "superadmin")
+        if(username == "santossuperadmin" && password == "santossuperadmin")
         {
             return new Users
             {
-                UserName = "superadmin",
+                UserName = "santossuperadmin",
                 PasswordHash = "superadmin",
                 Role = "Admin"
             };

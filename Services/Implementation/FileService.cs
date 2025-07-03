@@ -13,7 +13,7 @@ public class FileService : IFileService
     private readonly Dictionary<string, string[]> _allowedFileTypes = new()
     {
         ["Documents"] = new[] { ".pdf", ".doc", ".docx", ".txt", ".rtf" },
-        ["Spreadsheets"] = new[] { ".xls", ".xlsx", ".csv" },
+       ["Spreadsheets"] = new[] { ".xls", ".xlsx", ".csv" },
         ["Presentations"] = new[] { ".ppt", ".pptx" },
         ["Text"] = new[] { ".txt", ".log", ".md" }
     };

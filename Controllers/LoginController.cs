@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-[Route("hidden1-login1")]
+[Route("jLpQ8vAZeM")]
 public class LoginController : Controller
 {
     private readonly UserService _userService;
@@ -44,13 +44,7 @@ public class LoginController : Controller
         return RedirectToAction("Index", "Admin");
     }
 
-    /*    public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index");
-        }*/
-
-
+    
     [HttpGet("Logout")]
     public async Task<IActionResult> Logout()
     {

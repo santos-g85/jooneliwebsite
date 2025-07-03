@@ -1,17 +1,17 @@
 ﻿@model List<webjooneli.Models.Entities.NewsModel>
 
-<div class="">
-    <div class="container py-5">
+<div style="width: 85%; margin: 0 auto;">
+    <div class="container ">
         <!-- Featured News Carousel -->
         @if (Model.Any(n => n.IsFeatured))
         {
             <div class="mb-5">
 
-                <h2 class="mb-4 display-2 border-bottom text-center" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
+                <h2 class="mb-4 display-2 text-center" style="background: linear-gradient(to right, #f44336, #4caf50); -webkit-background-clip: text; color: transparent;">
                     Featured Stories
                 </h2>
 
-                <div id="featuredNewsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+                <div id="featuredNewsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
                     <div class="carousel-inner">
                         @{
                             var featuredItems = Model.Where(n => n.IsFeatured).ToList();
@@ -19,7 +19,7 @@
                             {
                                 var item = featuredItems[i];
                                 <div class="carousel-item @(i == 0 ? "active" : "")">
-                                    <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                                    <div class="card h-75 border-0 shadow-sm overflow-hidden">
                                         <div class="ratio ratio-16x9 bg-light">
                                             @if (!string.IsNullOrEmpty(item.ImageId))
                                             {
@@ -91,7 +91,7 @@
                                         </span>
                                     }
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body bg-light">
                                     <span class="badge bg-danger mb-2">@item.Category</span>
                                     <h3 class="h5 card-title">@item.Title</h3>
                                     <p class="card-text text-muted">@(item.Content.Length > 150 ? item.Content.Substring(0, 150) + "..." : item.Content)</p>
@@ -115,12 +115,12 @@
             <div class="col-lg-4">
                 <div class="sticky-top" style="top: 20px;">
                     @{
-                        if(Model.Count(x => x.Category.ToString() == "Blogs") > 0)
+                        if (Model.Count(x => x.Category.ToString() == "Blogs") > 0)
                         {
                             @await Html.PartialAsync("_BlogSidebar.cshtml", Model)
-                        }   
-                   }
-                    
+                        }
+                    }
+
                     <!--categories-->
                     @* @await Html.PartialAsync("_NewsCategories.cshtml", Model) *@
 
@@ -143,7 +143,7 @@
     .object-fit-cover {
         object-fit: cover;
     }
-    
+
     .carousel-control-prev,
     .carousel-control-next {
         width: auto;

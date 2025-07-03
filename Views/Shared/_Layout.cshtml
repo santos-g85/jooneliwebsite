@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="~/css/topnav.css" asp-append-version="true" /> 
     <link rel="stylesheet" href="~/css/video.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/touch-button.css" asp-append-version="true" />
-
+    <link rel="stylesheet" href="~/css/navlogotoggle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navtwo.css" asp-append-version="true" />
 
     <link rel="icon" type="image/x-icon" href="~/images/joonlogo--JfLTwqW.png" />
 
@@ -90,7 +91,8 @@
     }
     else
     {
-        <section>
+        <div >
+            <section>
             <div class="navbar-container position-relative">
                 <div class="navbar-bg-overlay"></div>
 
@@ -99,6 +101,7 @@
                 </nav>
             </div>
         </section>
+        </div>
     }
 
     @if (ViewContext.RouteData.Values["controller"]?.ToString() == "About" 
@@ -111,6 +114,18 @@
     && ViewContext.RouteData.Values["action"]?.ToString()== "Index")
     {
         @await Html.PartialAsync("~/Views/Solutions/_SolutionsBanner.cshtml")
+    }
+
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Career"
+    && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+    {
+        @await Html.PartialAsync("~/Views/Career/_CareerBanner.cshtml")
+    }
+
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Message" 
+    && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+    {
+        @await Html.PartialAsync("~/Views/Message/_ContactBanner.cshtml")
     }
 
     @await Html.PartialAsync("Partials/_MobileOffcanvas")

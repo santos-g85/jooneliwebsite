@@ -1,0 +1,10 @@
+﻿/* Default navbar link style */
+.nav-link2 {
+    color: black !important;
+    transition: color 0.3s ease;
+}
+
+    /* On hover, turn the nav links red */
+    .nav-link2:hover {
+        color: red !important;
+    }

@@ -49,9 +49,9 @@ builder.Services.AddScoped<ICVUploadRepository, CVUploadRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/hidden1-login1";
-        options.LogoutPath = "/hidden1-login1/Logout";
-        options.AccessDeniedPath = "/hidden1-login1/AccessDenied";
+        options.LoginPath = "/jLpQ8vAZeM";
+        options.LogoutPath = "/jLpQ8vAZeM/Logout";
+        options.AccessDeniedPath = "/jLpQ8vAZeM/AccessDenied";
     });
 
 builder.Services.AddAuthorization();
@@ -99,7 +99,7 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "hiddenadmin",
-    pattern: "hidden-dashboard/{action=Index}/{id?}",
+    pattern: "jooneli_hidden-dashboard/{action=Index}/{id?}",
     defaults: new { controller = "Admin" });
 
 

@@ -6,7 +6,7 @@ using webjooneli.Repository.Interfaces;
 
 namespace webjooneli.Controllers
 {
-    [Route("hidden-dashboard")]
+    [Route("jooneli_hidden-dashboard")]
     public class AdminController : Controller
     {
         private readonly ISessionRepository _sessionRepository;

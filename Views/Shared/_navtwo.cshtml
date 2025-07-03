@@ -1,7 +1,7 @@
 ﻿<div class="container-fluid px-4 px-lg-5">
     <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index" style="margin-left:80px;">
-        <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:75px; width:75px;" />
+    <a class="navbar-brand d-flex align-items-center navbar-brand-custom" asp-controller="Home" asp-action="Index">
+        <img src="~/images/joonlogo--JfLTwqW.png" alt="Jooneli Inc" style="height:35px;"/>
     </a>
 
     <!-- Mobile Toggle -->
@@ -14,24 +14,24 @@
             
             <!-- Other nav items -->
             <li class="nav-item">
-                <a class="nav-link fs-6 " asp-controller="About" asp-action="Index">ABOUT</a>
+                <a class="nav-link fs-6 nav-link2 " asp-controller="About" asp-action="Index">ABOUT</a>
             </li>
 
             <!-- Solutions Dropdown -->
             <li class="nav-item dropdown solutions-dropdown">
-                <a class="nav-link fs-6" asp-controller="Solutions" asp-action="Index">
+                <a class="nav-link fs-6 nav-link2 " asp-controller="Solutions" asp-action="Index">
                     SOLUTIONS
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link fs-6 " asp-controller="Career" asp-action="Index">
+                <a class="nav-link fs-6 nav-link2 " asp-controller="Career" asp-action="Index">
                     CAREER
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link fs-6 " asp-controller="News" asp-action="Index">
+                <a class="nav-link fs-6 nav-link2 " asp-controller="News" asp-action="Index">
                     NEWS
                 </a>
             </li>
@@ -46,88 +46,5 @@
         </a>
     </div>
 
-   @*   <!-- Mega Dropdown Container -->
-    <div class="mega-dropdown-container">
-        <div class="mega-dropdown">
-            <!-- Your mega dropdown content here -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>Corporate Digital Banking</h5>
-                        <ul class="list-unstyled">
-                            <li class="text-decoration-none list-unstyled mb-4">
-                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-bank me-2"></i>
-                                    <span class="me-3 text-black">360 CBS</span>
-                                </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
-                            </li>
-                            <li class="text-decoration-none list-unstyled mb-4">
-                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-phone me-2"></i>
-                                    <span class="me-3 text-black">Mobile Banking</span>
-                                </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
-                            </li>
-                            <li class="text-decoration-none list-unstyled mb-4">
-                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-cash-coin me-2"></i>
-                                    <span class="me-3 text-black">ATM Banking</span>
-                                </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
-                            </li>
-                            <li class="text-decoration-none list-unstyled ">
-                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-phone me-2"></i>
-                                    <span class="me-3 text-black">Mobile Teller</span>
-                                </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- More columns as needed -->
-                    <div class="col-md-4">
-                        <h5>Trading System</h5>
-                        <ul class="list-unstyled">
-                            <li class="text-decoration-none list-unstyled mb-4">
-                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-cart-dash me-2"></i>
-                                    <span class="me-3 text-black">Trading System</span>
-                                </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
-                            </li>
-
-                            <li class="text-decoration-none list-unstyled">
-                                <a href="http://Jooneli.com/" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-building me-2"></i>
-                                    <span class="me-3 text-black ">ERP Mobile</span>
-                                </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Automation</h5>
-                        <ul class="list-unstyled">
-                            <li class="text-decoration-none list-unstyled mb-4">
-                                <a href="http://multipledesk.com/" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-plug me-2"></i>
-                                    <span class="me-3 text-black">MultipleDesk - Remote Access</span>
-                                </a>
-                                <span class="ms-4 text-danger">Multiple Desk</span>
-                            </li>
-                            <li class="text-decoration-none list-unstyled">
-                                <a href="#" class="text-decoration-none d-flex align-items-center">
-                                    <i class="bi bi-envelope me-2"></i>
-                                    <span class="me-3 text-black">Email Automation</span>
-                                </a>
-                                <span class="ms-4 text-danger">Jooneli Inc</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>  *@
     @await Html.PartialAsync("Partials/_MegaDropdown.cshtml")
 </div>

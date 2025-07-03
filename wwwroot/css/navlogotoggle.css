@@ -1,0 +1,9 @@
+﻿.navbar-brand-custom {
+    margin-left: 5px;
+}
+
+@media (min-width: 992px) {
+    .navbar-brand-custom {
+        margin-left: 80px;
+    }
+}

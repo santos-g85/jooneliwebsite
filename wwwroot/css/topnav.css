@@ -57,6 +57,19 @@
     color: #1f2937 !important;
 }
 
+ /*.nav-link-custom:hover {
+        color: red !important;
+ }*/
+
+    .nav-link-custom:hover,
+    .navbar-container.animate-bg .nav-link-custom:hover {
+        color: red !important;
+    }
+
+/*.navbar-container.animate-bg .nav-link-custom {
+    color: #1f2937 !important;
+}*/
+
 .navbar-container.animate-bg .navbar-brand-text {
     color: #1f2937 !important;
 }
@@ -82,3 +95,23 @@
 .navbar-container.animate-bg .navbar-logo {
     filter: none; 
 }
+
+
+
+
+
+/* Mega Dropdown Hover Effect */
+.mega-dropdown-item:hover a,
+.mega-dropdown-item:hover .description,
+.mega-dropdown-item:hover a span {
+    color: red !important;
+    transition: color 0.2s ease;
+}
+
+  /* Keep icons their original color on hover */
+.mega-dropdown-item:hover a i {
+    color: inherit !important;
+}
+
+
+
