@@ -1,23 +1,15 @@
-﻿@model webjooneli.Models.Entities.NewsModel
+﻿ @model webjooneli.Models.Entities.NewsModel
 
-<div class="container mt-4">
-    <div class="card ">
-        <div class="">
-            <h2 class="h4 mb-0">@Model.Title</h2>
-            <div class="d-flex justify-content-between align-items-center mt-2">
-                <span class="badge text-dark">@Model.Category</span>
-                <small class="">@Model.CreatedAt.ToString("MMMM dd, yyyy")</small>
+<div class="card-body mt-5" style="width: 85%; margin: 0 auto;">
+    <div class="row align-items-start">
+        @if (!string.IsNullOrEmpty(Model.ImageId))
+        {
+            <div class="col-md-5 mb-4 mb-md-0">
+                <img src="/@Model.ImageId" alt="@Model.Title" class="img-fluid rounded w-100" style="max-height: 400px; object-fit: cover;">
             </div>
-        </div>
+        }
 
-        <div class="card-body">
-            @if (!string.IsNullOrEmpty(Model.ImageId))
-            {
-                <div class="text-center mb-4">
-                    <img src="/@Model.ImageId" alt="@Model.Title" class="img-fluid rounded" style="max-height: 400px;">
-                </div>
-            }
-
+        <div class="col-md-7">
             <div class="news-content mb-4">
                 @Html.Raw(Model.Content)
             </div>
@@ -25,7 +17,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 @if (Model.IsFeatured)
                 {
-                    <span class="badge bg-warning text-dark">
+                    <span class="badge bg-secondary-subtle text-dark">
                         <i class="fas fa-star me-1"></i> Featured Story
                     </span>
                 }
@@ -34,44 +26,5 @@
                 </a>
             </div>
         </div>
-
-        <div class="card-footer bg-light">
-            <div class="row">
-                <div class="col-md-6">
-                    <small class="text-muted">
-                        <i class="fas fa-calendar me-1"></i> Published: @Model.CreatedAt.ToString("MMMM dd, yyyy h:mm tt")
-                    </small>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <!-- Add social sharing buttons here if needed -->
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-
-@section Styles {
-    <style>
-        .news-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-            .news-content img {
-                max-width: 100%;
-                height: auto;
-                margin: 1rem 0;
-                border-radius: 4px;
-            }
-
-        .card {
-            border: none;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .card-header {
-            border-bottom: none;
-        }
-    </style>
-}
