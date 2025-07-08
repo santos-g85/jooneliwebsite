@@ -35,11 +35,17 @@
                                         <div class="card-body">
                                             <span class="badge bg-primary mb-2">@item.Category</span>
                                             <h3 class="h5 card-title">@item.Title</h3>
-                                            <p class="card-text text-muted">@(item.Content.Length > 100 ? item.Content.Substring(0, 100) + "..." : item.Content)</p>
+                                            <p class="card-text text-muted">@Html.Raw(item.Content.Length > 100 ? item.Content.Substring(0, 100) + "..." : item.Content)</p>
                                         </div>
                                         <div class="card-footer bg-transparent">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <small class="text-muted">@item.CreatedAt.ToString("MMMM dd, yyyy")</small>
+                                                <small class="text-muted">@item.CreatedAt.ToString("MMMM dd, yyyy").</small>
+                                            
+                                                @if (!string.IsNullOrEmpty(item.Source))
+                                                {
+                                                       <span class="text-muted">@item.Source</span>
+                                                }
+                                                
                                                 <a href="@Url.Action("NewsDetail", "News", new { id = item.Id })" class="btn btn-sm btn-outline-danger stretched-link">Read More</a>
                                             </div>
                                         </div>
@@ -94,11 +100,18 @@
                                 <div class="card-body bg-light">
                                     <span class="badge bg-danger mb-2">@item.Category</span>
                                     <h3 class="h5 card-title">@item.Title</h3>
-                                    <p class="card-text text-muted">@(item.Content.Length > 150 ? item.Content.Substring(0, 150) + "..." : item.Content)</p>
+                                    <p class="card-text text-muted">@Html.Raw(item.Content.Length > 150 ? item.Content.Substring(0, 150) + "..." : item.Content)</p>
                                 </div>
                                 <div class="card-footer bg-transparent">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-muted">@item.CreatedAt.ToString("MMMM dd, yyyy")</small>
+
+                                        @if (!string.IsNullOrEmpty(item.Source))
+                                        {
+                                            <a href="@item.SourceUrl" class="small text-muted text-decoration-none">
+                                                <i class="bi bi-link-45deg"></i> @item.Source
+                                            </a>
+                                        }
                                         <a href="@Url.Action("NewsDetail", "News", new { id = item.Id })" class="btn btn-sm btn-link text-decoration-none">
                                             Read More <i class="bi bi-arrow-right"></i>
                                         </a>

@@ -29,5 +29,11 @@ namespace webjooneli.Models.Entities
 
         [BsonElement("CreatedAt")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [BsonElement("NewsSource")]
+        public string? Source { get; set; } = string.Empty;
+
+        [BsonElement("NewsSourceUrl")]
+        public string? SourceUrl { get; set; } = string.Empty;
     }
 }

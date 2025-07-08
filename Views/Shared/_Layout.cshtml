@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]Jooneli Inc</title>
+    <title>@ViewData["Title"]Jooneli Group - Modernize your data landscape to monetize Data</title>
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/topnav.css" asp-append-version="true" /> 
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="~/css/navlogotoggle.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/navtwo.css" asp-append-version="true" />
 
-    <link rel="icon" type="image/x-icon" href="~/images/joonlogo--JfLTwqW.png" />
+    <link rel="icon" type="image/x-icon" href="~/360Feviconjooneli.ico" />
 
     <!-- SEO Meta Tags -->
     <meta name="keywords" content="Jooneli Inc" />
@@ -83,7 +83,6 @@
                 @await Html.PartialAsync("Partials/_HomeHeroContent") 
             </section>
         </div>
-        @await Html.PartialAsync("Partials/_AboutHomePreview")
     }
     else
     {
@@ -122,6 +121,12 @@
     && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
     {
         @await Html.PartialAsync("~/Views/Message/_ContactBanner.cshtml")
+    }
+
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "News"
+    && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+    {
+        @await Html.PartialAsync("~/Views/News/_NewsBanner.cshtml")
     }
 
     @await Html.PartialAsync("Partials/_MobileOffcanvas")

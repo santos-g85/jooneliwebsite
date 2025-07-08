@@ -27,12 +27,11 @@ namespace webjooneli.Controllers
             var news = await _newsRepository.GetNewsByDateAsync();
             if (news == null)
                 return NotFound();
-
             return View(news);
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Unauthenticated404]
         public async Task<IActionResult> AdminIndex()
         {
             List<NewsModel> newsList = await _newsRepository.GetAllNewsAsync();
@@ -91,7 +90,6 @@ namespace webjooneli.Controllers
             {
                 return View(news);
             }
-
             try
             {
                 // Handle image upload if provided
@@ -101,19 +99,15 @@ namespace webjooneli.Controllers
                     news.ImageId = await _imageService.UploadImageAsync(imageFile);
                     _logger.LogInformation("got the iamge url");
                 }
-
                 news.CreatedAt = DateTime.UtcNow;
-
                 await _newsRepository.CreateNewsAsync(news);
-
-                TempData["SuccessMessage"] = "News created successfully!";
                 return RedirectToAction(nameof(AdminIndex));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating news");
                 ModelState.AddModelError("", "Error creating news: " + ex.Message);
-                return View(news);
+                return RedirectToAction(nameof(AdminIndex));
             }
         }
 
@@ -155,15 +149,15 @@ namespace webjooneli.Controllers
         //[Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, NewsModel news, IFormFile? newImageFile)
+        public async Task<IActionResult> Edit( NewsModel news, IFormFile? newImageFile)
         {
             try
             {
-                if (id != news.Id)
+               /* if (id != news.Id)
                 {
                     _logger.LogWarning("ID mismatch in Edit request");
                     return BadRequest();
-                }
+                }*/
 
                 if (!ModelState.IsValid)
                 {
@@ -171,11 +165,10 @@ namespace webjooneli.Controllers
                     return View(news);
                 }
 
-                var existingNews = await _newsRepository.GetNewsByIdAsync(id);
+                var existingNews = await _newsRepository.GetNewsByIdAsync(news.Id);
                 if (existingNews == null)
                 {
-                    _logger.LogWarning("News not found for ID: {Id}", id);
-                    TempData["ErrorMessage"] = "News not found";
+                    _logger.LogWarning("News not found for ID: {Id}", news.Id);
                     return RedirectToAction(nameof(AdminIndex));
                 }
 
@@ -209,14 +202,12 @@ namespace webjooneli.Controllers
                     news.ImageId = existingNews.ImageId;
                 }
 
-                await _newsRepository.UpdateNewsAsync(id, news);
-                TempData["SuccessMessage"] = "News updated successfully";
+                await _newsRepository.UpdateNewsAsync( news);
                 return RedirectToAction(nameof(AdminIndex));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating news");
-                TempData["ErrorMessage"] = "An error occurred while updating the news";
                 return View(news);
             }
         }
@@ -246,8 +237,8 @@ namespace webjooneli.Controllers
         {
             var news = await _newsRepository.GetNewsByIdAsync(id);
             var imagepath = news.ImageId;
-            await _newsRepository.DeleteNewsAsync(id);
             DeleteImage(imagepath);
+            await _newsRepository.DeleteNewsAsync(id);
             return RedirectToAction(nameof(AdminIndex));
         }
 
@@ -270,12 +261,10 @@ namespace webjooneli.Controllers
             {
                 _logger.LogInformation("Trying to create subscription!");
                  await _newsRepository.CreateSubscription(usersubinfo);
-                TempData["SuccessMessage"] = "Successfully subscribed to newsletter!";
             }
             catch(Exception ex)
             {
                 _logger.LogError($"Subscription creation failed, {ex.Message}");
-                TempData["ErrorMessage"] = "Something went wrong";
             }
             return RedirectToAction(nameof(Index));
 

@@ -14,7 +14,7 @@
                 {
                     var featured = Model.OrderByDescending(n => n.CreatedAt).First();
                     <a href="@Url.Action("NewsDetail", "News", new { id = featured.Id })" class="text-decoration-none text-dark">
-                    <img src="/@featured.ImageId" class="card-img-top rounded" alt="Featured News" style="height:400px;"/>
+                    <img src="/@featured.ImageId" class="card-img-top rounded" alt="Featured News"/>
                     <div class="card-body">
                         <h5 class="card-title fw-bold">
                             @featured.Title
@@ -45,6 +45,14 @@
             {
                 @foreach (var newsItem in Model.OrderByDescending(n => n.CreatedAt).Take(4))
                  {
+                    @if (!string.IsNullOrEmpty(newsItem.Source))
+                    {
+                        <div class="ms-1">
+                            <a href="@newsItem.SourceUrl" target="_blank" class="small text-muted text-decoration-none">
+                                <i class="bi bi-link-45deg"></i> @newsItem.Source
+                            </a>
+                        </div>
+                    }
                     <a href="@Url.Action("NewsDetail", "News", new { id = newsItem.Id })" class="text-decoration-none text-dark">
 
                      <div class="d-flex mb-4  rounded-3 mb-3">
@@ -53,9 +61,11 @@
                                <span class="text-uppercase text-muted small">@newsItem.Category</span>
                                <h6 class="mb-1 fw-semibold">@newsItem.Title</h6>
                                <small class="text-muted">@newsItem.CreatedAt.ToString("MMMM dd, yyyy")</small>
+                                @* <span class="text-muted ms-5">@newsItem.Source</span> *@
                         </div>
                      </div>
                      </a>
+                    
                 }
             }
             else

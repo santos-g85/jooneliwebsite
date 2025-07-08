@@ -107,17 +107,21 @@ namespace webjooneli.Repository.Implementations
             }
         }
 
-        public async Task UpdateNewsAsync(string id, NewsModel updatedNews)
+        public async Task UpdateNewsAsync( NewsModel updatedNews)
         {
+           // var news = _newscollection.Find(x => x.Id , updatedNews.Id);
             try
             {
                
-                var filter = Builders<NewsModel>.Filter.Eq(news => news.Id, id);
+                var filter = Builders<NewsModel>.Filter.Eq(news => news.Id, updatedNews.Id);
                 var update = Builders<NewsModel>.Update
                     .Set(news => news.Title, updatedNews.Title)
                     .Set(news => news.Content, updatedNews.Content)
                     .Set(news => news.Category, updatedNews.Category)
-                    .Set(news=>news.IsFeatured, updatedNews.IsFeatured);
+                    .Set(news=>news.IsFeatured, updatedNews.IsFeatured)
+                    .Set(news => news.ImageId, updatedNews.ImageId)
+                    .Set(news => news.Source,updatedNews.Source)
+                    .Set(news => news.SourceUrl, updatedNews.SourceUrl);
 
                 var result = await _newscollection.UpdateOneAsync(filter, update);
 
@@ -127,7 +131,7 @@ namespace webjooneli.Repository.Implementations
                 }
                 else
                 {
-                    _logger.LogWarning("No news found to update with id: {Id}", id);
+                    _logger.LogWarning("No news found to update with id: {Id}", updatedNews.Id);
                 }
             }
             catch (Exception ex)
